@@ -443,7 +443,8 @@ $english = array(
 		'entity:in' => 'In',
 		'entity:out' => 'Out',
 		'activate_employee:create_password' => 'Create Password',
-		
+		"present:stock" => 'Present Stock',
+                "additional:stock" => 'Additional stock'
 );
 
 add_translation("en", $english);

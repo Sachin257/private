@@ -6,6 +6,7 @@ $unique_id = get_input('paint_id');
 $colour = get_input('colour');
 $price = get_input('price');
 $quantity = get_input('quantity');
+$additional = get_input('additional');
 
 if ($paint_guid){
 	$entity = get_entity($paint_guid);
@@ -25,7 +26,7 @@ $paint->title = $title;
 $paint->paint_id = $unique_id;
 $paint->colour = $colour;
 $paint->price = $price;
-$paint->quantity = $quantity;
+$paint->quantity = $quantity + $additional;
 
 
 $paint->is_deleted = 0;
