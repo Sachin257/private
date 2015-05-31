@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Proxima-nova';
+    src: url('../fonts/Proxima-nova.eot');
+    src: url('../fonts/Proxima-nova.woff') format('woff'), url('../fonts/Proxima-nova.ttf') format('truetype'), 
+         url('../fonts/Proxima-nova.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+#footer {
+    color: #787878;
+    font-size: 11px;
+    margin: 0 auto;
+    width: 1002px;
+}
+#footer {padding: 0 20px;}
+.nest_wrap, .userrow {overflow: hidden;}
+div.elgg-page-footer {}
+.elgg-page-footer {}
+#footer{
+   // background-color: white;
+}
+#footer .fcolumn {    
+    line-height: 40px;
+    width: 49%;
+}
+.fcolumn a:first-child {margin-left: 0;}
+.fcolumn a {color: #787878;}
+.terms, .cookie, .privacy {font-size: 11px;}
+.fcolumn small{font-size:100%;}
+.modal {
+    border-radius: 0px !important;
+    width: 65%;
+    left: 40%;
+}
+.modal-dialog {
+    background: url("../img/tick_bg.png") no-repeat scroll right bottom / 45% auto rgba(0, 0, 0, 0);
+}
+.dlt_confirm{margin-top: 30px;}
+.modal-content {padding: 15px;}
+h1.modal-title {
+    color: #dd4914;
+    font-size: 1.6rem;
+}
+.modal-header h1 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    line-height: 36px;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+}
+.modal-header {
+    border-bottom: none;
+}
+.modal-body {
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    font-family: Arial,Helvetica,sans-serif;
+    overflow-y: auto; margin-bottom: 15px;}
+
+.modal-body .btn-default{margin: 15px 0;}
+
+.elgg-output p {
+    line-height: 22px;
+    margin: 0 0 9px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.btn_submit_grey {background: none repeat scroll 0 0 #8b8b8b;}
+.btn_submit, .btn_submit_grey {
+    border: 0 none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 10px 5%;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 18px;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+.btn:hover{
+    background-color: #ef9622;
+    /*background-position: 0 -15px;*/
+    color: #fff;
+    text-decoration: none;
+    /*transition: background-position 0.1s linear 0s;*/
+}
+

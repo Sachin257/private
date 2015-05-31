@@ -1,0 +1,8 @@
+
+2014-05-21 13:18:14: Securimage audio error "Error generating audio captcha on letter ' ': Failed to open "/home/twigal6/public_html/twiganex.com/mod/gutwacaptcha/audio/en/ .wav". File not found."
+2014-05-21 13:18:26: Securimage audio error "Error generating audio captcha on letter ' ': Failed to open "/home/twigal6/public_html/twiganex.com/mod/gutwacaptcha/audio/en/ .wav". File not found."
+2014-05-21 13:18:37: Securimage audio error "Error generating audio captcha on letter ' ': Failed to open "/home/twigal6/public_html/twiganex.com/mod/gutwacaptcha/audio/de/ .wav". File not found."
+2014-05-21 13:21:17: Securimage audio error "Path to SoX binary is incorrect or not executable"
+2014-05-21 13:21:26: Securimage audio error "Path to SoX binary is incorrect or not executable"
+2014-05-21 13:21:37: Securimage audio error "Path to SoX binary is incorrect or not executable"
+2014-05-21 13:31:23: Securimage audio error "Failed to get audible code (are database settings correct?).  Check the error log for details"
