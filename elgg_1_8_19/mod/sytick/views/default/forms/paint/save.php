@@ -31,11 +31,21 @@
 <br/>
 
 <div class="span5">
-    <label><?php echo elgg_echo("paint:quantity"); ?></label>
+    <label><?php if ($vars["entity"]->guid) { 
+                    echo elgg_echo("Present:stock");
+                } else {
+                    echo elgg_echo("paint:quantity");
+                } ?></label>
    <?php echo elgg_view('input/text', array('name' => 'quantity', "id"=>"paint_quantity" , 'value' => $vars["entity"]->quantity)); ?>
     <span class="error_msg clear paint_quantity_err"></span>
 </div>
-
+<?php if ($vars["entity"]->guid) { ?>
+<div class="span5">
+    <label><?php echo elgg_echo("additional:stock");?></label> 
+    <?php echo elgg_view('input/text', array('name' => 'additional', "id"=>"paint_additional", 'value' => 0)); ?>
+    <span class="error_msg clear paint_additional_err"></span>
+</div>
+<?php }?>
 <div class="clear"></div>
 
 <?php 

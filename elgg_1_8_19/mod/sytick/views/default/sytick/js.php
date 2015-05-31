@@ -1643,6 +1643,12 @@ elgg.sytick.init = function() {
 		} else {
 			jQuery(".paint_quantity_err").html("");
 		}
+                if( !$.isNumeric(jQuery('#paint_additional').val()) || jQuery('#paint_additional').val() < 0 ){
+			jQuery(".paint_additional_err").html(elgg.echo("paint:price:notnumber:error"));
+			paint_flg = false;
+		} else {
+			jQuery(".paint_additional_err").html("");
+		}
 		if(paint_flg  == false)
 		{
 			event.preventDefault();

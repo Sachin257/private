@@ -30,14 +30,19 @@ $offset = elgg_extract('offset', $vars);
 					'rel' => 'nofollow'
 			)); ?>
 			</td>
-                        <td><?php echo $paint_entitie->paint_id;?></td>
+                        <td><?php
+                                $edit_url = "/paint/edit/$paint_entitie->guid";
+                                echo elgg_view('output/url', array(
+					'href' => $edit_url,
+					'text' => $paint_entitie->paint_id,
+					'class' => '',
+					'rel' => 'nofollow'
+                                ));?></td>
                         <td><?php echo $paint_entitie->colour;?></td>
                         <td style="text-align: left;"><?php echo $paint_entitie->price;?></td>
                         <td><?php echo $paint_entitie->quantity;?></td>
 			<td class="company-link">
-			<?php
-				$edit_url = "/paint/edit/$paint_entitie->guid";
-						
+			<?php						
 			echo elgg_view('output/url', array(
 					'href' => $edit_url,
 					'text' => elgg_echo('entity:edit'),
