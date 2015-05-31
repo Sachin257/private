@@ -42,6 +42,8 @@ switch($process){
 		$paint_guid = get_input('paint_id');
                 $no_of_pieces = get_input('nopieces');
 		$project_guid = get_input("project_guid");
+                $employee = get_input('employee_name');
+                $shift = get_input("shift");
                 $project = get_entity($project_guid);
                 
                 $entity = get_entity($paint_guid);
@@ -59,6 +61,8 @@ switch($process){
                 $dailyWork->paint_quantity_used = $paint_used;
                 $dailyWork->paint_used = $paint_guid;
                 $dailyWork->proj_guid = $project_guid;
+                $dailyWork->employee = $employee;
+                $dailyWork->shift = $shift;
                 $dailyWork->is_deleted = 0;
                 $dailyWork_guid = $dailyWork->save();
                 if($dailyWork_guid)

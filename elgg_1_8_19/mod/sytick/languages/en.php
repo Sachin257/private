@@ -444,7 +444,9 @@ $english = array(
 		'entity:out' => 'Out',
 		'activate_employee:create_password' => 'Create Password',
 		"present:stock" => 'Present Stock',
-                "additional:stock" => 'Additional stock'
+                "additional:stock" => 'Additional stock',
+                "paint:user:employee" => "Employee Name",
+                "paint:used:shift" => "Shift"
 );
 
 add_translation("en", $english);
