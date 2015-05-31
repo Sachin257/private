@@ -27,7 +27,6 @@
     );
     $vars["paints"] = elgg_get_entities_from_metadata($options);
 
-// add the form to this section
     $content = elgg_view("admin/sytick_dashboard", $vars);
 
     // layout the page
