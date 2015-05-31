@@ -2815,6 +2815,11 @@ elgg.sytick.init = function() {
 			jQuery(".nopieces_err").html(elgg.echo("paint:price:notnumber:error"));
 			daily_falg = false;
 		   }
+                   if($("#employee_name").val() == "")
+                   {
+                        jQuery(".employee_name_err").html(elgg.echo("Enter employee name."));
+			daily_falg = false;
+                   }
         
 		if(daily_falg == true)
 		  {

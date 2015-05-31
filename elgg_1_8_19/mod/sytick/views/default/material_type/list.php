@@ -23,7 +23,7 @@ $offset = elgg_extract('offset', $vars);
 		<tr id="elgg-object-<?php echo $material_type_entitie->guid?>" class="elgg-item">
 			<td class="company-title">
 			<?php  echo elgg_view('output/url', array(
-					'href' => "/view/$material_type_entitie->guid",
+					'href' => "/material_type/edit/$material_type_entitie->guid",
 					'text' => $material_type_entitie->title,
 					'class' => '',
 					'rel' => 'nofollow'
