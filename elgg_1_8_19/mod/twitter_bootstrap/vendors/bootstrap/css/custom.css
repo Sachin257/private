@@ -1035,3 +1035,7 @@ a.induction_activate:hover{color:#fff;}
 .checkin_in_out_header a.selected_cls sup{background:#242424;}
 
 .footerModal.fade.in{ top: 55% !important;}
+
+.modal .userfileup ul li {
+    list-style-image: none !important;
+}
