@@ -85,7 +85,6 @@ function sytick_init() {
     elgg_register_page_handler('security_person', 'sytick_security_person_page_handler');
     elgg_register_page_handler('sitemanager', 'sytick_sitemanager_page_handler');
     elgg_register_page_handler('project_manager', 'sytick_project_manager_page_handler');
-    elgg_register_page_handler('sites', 'sytick_sites_page_handler');
 
     elgg_register_action("user/save", elgg_get_plugins_path() . "sytick/actions/user/save.php");
     elgg_register_action("user/emergency", elgg_get_plugins_path() . "sytick/actions/user/emergency.php");
@@ -110,9 +109,6 @@ function sytick_init() {
     elgg_register_action("painting_project/save", elgg_get_plugins_path() . "sytick/actions/painting_project/save.php");
 
     elgg_register_action("employee/save", elgg_get_plugins_path() . "sytick/actions/employee/save.php");
-
-    elgg_register_action("sites/save", elgg_get_plugins_path() . "sytick/actions/sites/save.php");
-    elgg_register_action("sites/delete", elgg_get_plugins_path() . "sytick/actions/sites/delete.php");
 
     elgg_extend_view('js/elgg', 'sytick/js');
     $avatar_cropper = 'mod/twitter_bootstrap/vendors/bootstrap/js/ui.avatar_cropper.js';
@@ -430,25 +426,6 @@ function sytick_project_manager_page_handler($segments) {
         default:
         case 'all':
             include elgg_get_plugins_path() . 'sytick/pages/project_manager/all.php';
-            break;
-    }
-}
-
-function sytick_sites_page_handler($segments) {
-    //print '<pre>';print_r($segments);exit;
-    switch ($segments[0]) {
-        case 'add':
-            include elgg_get_plugins_path() . 'sytick/pages/sites/add.php';
-            break;
-        case 'edit':
-            include elgg_get_plugins_path() . 'sytick/pages/sites/edit.php';
-            break;
-        case 'view':
-            include elgg_get_plugins_path() . 'sytick/pages/sites/view.php';
-            break;
-        default:
-        case 'all':
-            include elgg_get_plugins_path() . 'sytick/pages/sites/all.php';
             break;
     }
 }
