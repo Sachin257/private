@@ -32,7 +32,7 @@
 
 <div class="span5">
     <label><?php if ($vars["entity"]->guid) { 
-                    echo elgg_echo("Present:stock");
+                    echo elgg_echo("paint:current:quantity");
                     $disabled = TRUE;
                 } else {
                     echo elgg_echo("paint:quantity");
@@ -48,6 +48,13 @@
     <span class="error_msg clear paint_additional_err"></span>
 </div>
 <?php }?>
+
+<div class="span5">
+    <label><?php echo elgg_echo("minimum:stock");?></label> 
+    <?php echo elgg_view('input/text', array('name' => 'alert_threshold', "id"=>"alert_threshold", 'value' => $vars["entity"]->threshold)); ?>
+    <span class="error_msg clear alert_threshold_err"></span>
+</div>
+
 <div class="clear"></div>
 
 <?php 

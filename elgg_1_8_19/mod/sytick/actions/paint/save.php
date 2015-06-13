@@ -5,8 +5,8 @@ $title = get_input('title');
 $unique_id = get_input('paint_id');
 $colour = get_input('colour');
 $price = get_input('price');
-$quantity = get_input('quantity');
-$additional = get_input('additional');
+$quantity = (int) get_input('quantity') + (int) get_input('additional');
+$threshold = get_input('alert_threshold');
 
 if ($paint_guid){
 	$entity = get_entity($paint_guid);
@@ -27,7 +27,7 @@ $paint->paint_id = $unique_id;
 $paint->colour = $colour;
 $paint->price = $price;
 $paint->quantity = $quantity + $additional;
-
+$paint->threshold = $threshold;
 
 $paint->is_deleted = 0;
 

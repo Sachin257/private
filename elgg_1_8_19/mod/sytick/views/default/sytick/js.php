@@ -1643,16 +1643,23 @@ elgg.sytick.init = function() {
 		} else {
 			jQuery(".paint_quantity_err").html("");
 		}
-                if( !$.isNumeric(jQuery('#paint_additional').val()) || jQuery('#paint_additional').val() < 0 ){
-			jQuery(".paint_additional_err").html(elgg.echo("paint:price:notnumber:error"));
-			paint_flg = false;
-		} else {
-			jQuery(".paint_additional_err").html("");
-		}
-		if(paint_flg  == false)
-		{
-			event.preventDefault();
-			return false;
+                if(jQuery('#paint_additional').length > 0){
+                    if( !$.isNumeric(jQuery('#paint_additional').val()) || jQuery('#paint_additional').val() < 0 ){
+                        jQuery(".paint_additional_err").html(elgg.echo("paint:price:notnumber:error"));
+                        paint_flg = false;
+                    } else {
+                        jQuery(".paint_additional_err").html("");
+                    }
+                }
+                if( !$.isNumeric(jQuery('#alert_threshold').val()) || jQuery('#alert_threshold').val() < 0 ){
+                    jQuery(".alert_threshold_err").html(elgg.echo("paint:price:notnumber:error"));
+                    paint_flg = false;
+                } else {
+                    jQuery(".alert_threshold_err").html("");
+                }
+		if(paint_flg  == false){
+                    event.preventDefault();
+                    return false;
 		} 
 	});
               
