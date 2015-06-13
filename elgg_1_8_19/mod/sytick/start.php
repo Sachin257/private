@@ -85,6 +85,7 @@ function sytick_init() {
     elgg_register_page_handler('security_person', 'sytick_security_person_page_handler');
     elgg_register_page_handler('sitemanager', 'sytick_sitemanager_page_handler');
     elgg_register_page_handler('project_manager', 'sytick_project_manager_page_handler');
+    elgg_register_page_handler('paint_used', 'sytick_paint_used_page_handler');
 
     elgg_register_action("user/save", elgg_get_plugins_path() . "sytick/actions/user/save.php");
     elgg_register_action("user/emergency", elgg_get_plugins_path() . "sytick/actions/user/emergency.php");
@@ -103,6 +104,7 @@ function sytick_init() {
     elgg_register_action("project/delete", elgg_get_plugins_path() . "sytick/actions/project/delete.php");
     elgg_register_action("paint/delete", elgg_get_plugins_path() . "sytick/actions/paint/delete.php");
     elgg_register_action("paint/save", elgg_get_plugins_path() . "sytick/actions/paint/save.php");
+    elgg_register_action("paint_used/save", elgg_get_plugins_path() . "sytick/actions/paint_used/save.php");
     elgg_register_action("inventory/delete", elgg_get_plugins_path() . "sytick/actions/inventory/delete.php");
     elgg_register_action("inventory/save", elgg_get_plugins_path() . "sytick/actions/inventory/save.php");
     elgg_register_action("painting_project/delete", elgg_get_plugins_path() . "sytick/actions/painting_project/delete.php");
@@ -237,6 +239,21 @@ function sytick_paint_page_handler($segments) {
             include elgg_get_plugins_path() . 'sytick/pages/paint/edit.php';
             break;
     }
+}
+
+function sytick_paint_used_page_handler($segments){
+    switch ($segments[0]) {
+        case 'add':
+            include elgg_get_plugins_path() . 'sytick/pages/paint_used/add.php';
+            break;
+        case 'edit':
+            include elgg_get_plugins_path() . 'sytick/pages/paint_used/edit.php';
+            break;
+        case 'all':
+        default :
+            include elgg_get_plugins_path() . 'sytick/pages/paint_used/all.php';
+            break;
+    }    
 }
 
 function sytick_items_page_handler($segments) {

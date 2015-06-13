@@ -177,11 +177,18 @@ switch($process){
                                     'operand' => '='
                     );
                 $entities = elgg_get_entities_from_metadata($search_arr);
-//                print_r($paint_entities);exit;
                 }else{
                     echo $inventory_type;exit;
                 }
                 $result['roles'] = $entities;
+                break;
+        case "get_paint_details":
+                $paint_guid = get_sanitised_input('paint_guid');
+                $paint = get_entity($paint_guid);
+                $result['paint_name'] = $paint->title;
+                $result['paint_id'] = $paint->paint_id;
+                $result['colour'] = $paint->colour;
+                $result['quantity'] = $paint->quantity;
                 break;
 	case "activateemployee":
 		$user_guid = get_input('u');
