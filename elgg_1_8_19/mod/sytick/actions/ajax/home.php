@@ -124,6 +124,12 @@ switch($process){
 			forward(REFERER);
 		}
 		break;
+        case "change_alert_response":
+                $alert_id = get_input('alert');
+                $alert = get_entity($alert_id);
+                $alert->response = 1;
+                $alert->save();
+                break;
 	case "getsitesformfields":
 		// check username
 		$company_id = get_sanitised_input('company_id');

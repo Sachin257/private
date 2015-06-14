@@ -16,8 +16,13 @@ $offset = elgg_extract('offset', $vars);
                         <th><?php echo elgg_echo('material:name') ?></th>
                         <th><?php echo elgg_echo('material:type') ?></th>
                         <th><?php echo elgg_echo('material_alerts:used:quantity') ?></th>
+                        <th><?php echo "Alert Response"?></th>
                     </tr>
                     <?php foreach ($material_alerts_entities as $material_alerts_entitie) {
+                        $response = "No";
+                        if($material_alerts_entitie->response){
+                            $response = "Yes";
+                        }
                         if($material_alerts_entitie->is_active){
                         ?>
                         <tr id="elgg-object-<?php echo $material_alerts_entitie->guid ?>" class="elgg-item" style="height: 40px;">
@@ -25,6 +30,7 @@ $offset = elgg_extract('offset', $vars);
                             <td><?php echo $material_alerts_entitie->title; ?></td>
                             <td><?php echo $material_alerts_entitie->material_type; ?></td>
                             <td><?php echo $material_alerts_entitie->quantity; ?></td>
+                            <td class="respond_alert" style="cursor: pointer;" data-guid="<?php echo $material_alerts_entitie->guid ?>"><?php echo $response;?></td>
                         </tr>
                         <?php }
                         } ?>

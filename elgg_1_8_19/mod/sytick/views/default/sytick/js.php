@@ -2325,6 +2325,30 @@ elgg.sytick.init = function() {
                     }
          });
          
+         jQuery(".respond_alert").on("click", function(){
+            var alert =  $(this).attr("data-guid");
+            if($(this).text() == "No"){
+                $(this).text("Yes");
+            
+            var postData = "alert="+alert;
+            var __elgg_ts = elgg.security.token.__elgg_ts;
+            var __elgg_token =	elgg.security.token.__elgg_token;
+                        jQuery.ajax( {
+			    type: "POST",
+			    url : '/action/sytick/ajax/home',
+			    data : postData+"&process=change_alert_response&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data){
+                                    var obj_data = jQuery.parseJSON( data );
+                                    var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+                                    if(call_status != -1 ){	        			
+                                  
+                                    }		        	
+		        	}
+			    });  
+              }
+         });
+         
 	jQuery("#sites_company_id, #quest_company_id, #induct_company_id").live("change", function (event) {
 		  if(jQuery(this).val() != "" && elgg.is_admin_logged_in())
 		  {
