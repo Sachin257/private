@@ -74,7 +74,7 @@ function get_number_of_alerts(){
         'value' => 1,
         'operand' => '='
     );
-    $count = elgg_get_entities_from_metadata($options);
+    $count = elgg_get_entities_from_metadata($search_arr);
     return $count;
 }
 
