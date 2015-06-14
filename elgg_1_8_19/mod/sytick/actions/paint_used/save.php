@@ -2,15 +2,34 @@
 
 // get the form inputs
 $paint_guid = get_input('paint_id_name');
-$quantity = (int) get_input('quantity') ;
-$colour = get_input('paint_color');
+$quantity = get_input('paint_amount') ;
+$colour = get_input('colour');
 $unique_id = get_input('paint_id');
+$name = get_input('title');
 
 
-$paint_used = new ElggObject();
+if ($paint_guid){
+	$entity = get_entity($paint_guid);
+	if (elgg_instanceof($entity, 'object', 'paint') && $entity->canEdit()) {
+		$paint = $entity;
+	} else {
+		register_error(elgg_echo('paint:error:cannot_edit'));
+		forward('paint_used/all');
+	}
+}
 
+if($paint->quantity < $quantity){
+    register_error(elgg_echo('paint:error:cannot_edit'));
+    forward('paint_used/all');
+}else{
+    $paint->quantity = $paint->quantity - $quantity;
+    $paint->save();
+}
+   
+$paint_used = new ElggObject();    
 $paint_used->subtype = "paint_used";
-$paint_used->title = get_input('title');
+$paint_used->title = $name;
+$paint_used->paint_guid = $paint_guid;
 $paint_used->paint_used_id = $unique_id;
 $paint_used->colour = $colour;
 $paint_used->quantity = $quantity;
@@ -32,6 +51,6 @@ if ($paint_used_guid) {
     system_message(elgg_echo("paint_used:message:saved"));
     forward('paint_used/all');
 } else {
-    register_error(elgg_echo("paint:error:cannot_save"));
+    register_error(elgg_echo("paint_used:error:cannot_save"));
     forward(REFERER); // REFERER is a global variable that defines the previous page
 }

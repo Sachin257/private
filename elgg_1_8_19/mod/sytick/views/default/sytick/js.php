@@ -1620,14 +1620,13 @@ elgg.sytick.init = function() {
                 if( parseInt(jQuery('#paint_amount').val()) > parseInt(jQuery('#paint_quantity').val()) ){
                         jQuery(".paint_amount_err").html('Amount used cannot be greater than current stock.');
                         paint_flg = false;
-                        console.log('fsaddfasf');
                 } else {
                         jQuery(".paint_amount_err").html("");
                 }
                 if( !$.isNumeric(jQuery('#paint_amount').val()) || jQuery('#paint_amount').val() < 0 ){
 			jQuery(".paint_amount_err").html(elgg.echo("paint:price:notnumber:error"));
 			paint_flg = false;
-		} else {
+		} else if(paint_flg){
 			jQuery(".paint_amount_err").html("");
 		}
 		if(paint_flg  == false){

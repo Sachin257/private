@@ -21,7 +21,7 @@
     
     <div class="span5">
         <label><?php echo elgg_echo("paint:name"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'title', "id" => "paint_name", "disabled" => TRUE)); ?>
+        <?php echo elgg_view('input/text', array('name' => 'title', "id" => "paint_name", "readonly" => TRUE)); ?>
         <span class="clear error_msg"></span>
     </div>
 
@@ -29,19 +29,19 @@
 
     <div class="span5">
         <label><?php echo elgg_echo("paint:id"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'paint_id', "id" => "paint_id", "disabled" => TRUE )); ?>
+        <?php echo elgg_view('input/text', array('name' => 'paint_id', "id" => "paint_id", "readonly" => TRUE )); ?>
         <span class="clear error_msg"></span>
     </div>
 
     <div class="span5">
         <label><?php echo elgg_echo("paint:colour"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'colour', "id" => "paint_color" , "disabled" => TRUE)); ?>
+        <?php echo elgg_view('input/text', array('name' => 'colour', "id" => "paint_color" , "readonly" => TRUE)); ?>
         <span class="clear error_msg"></span>
     </div>
 
     <div class="span5">
         <label><?php echo elgg_echo("paint:current:quantity"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'quantity', "id" => "paint_quantity" , "disabled" => TRUE)); ?>
+        <?php echo elgg_view('input/text', array('name' => 'quantity', "id" => "paint_quantity" , "readonly" => TRUE)); ?>
         <span class="clear error_msg"></span>
     </div>
 
