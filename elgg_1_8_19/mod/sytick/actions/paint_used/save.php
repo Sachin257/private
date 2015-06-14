@@ -25,6 +25,8 @@ if($paint->quantity < $quantity){
     $paint->quantity = $paint->quantity - $quantity;
     $paint->save();
 }
+
+check_and_create_paint_alerts($paint_guid);
    
 $paint_used = new ElggObject();    
 $paint_used->subtype = "paint_used";

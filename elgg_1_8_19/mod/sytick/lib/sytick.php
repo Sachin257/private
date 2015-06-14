@@ -23,20 +23,67 @@ function get_employee_last_check_in_out($employees_id, $project_guid) {
         }
     }
     return $employee_check_in_out_status_arr;
-    //$employees_check_in_out_obj = get_employee_current_checkin_status($user_guid, $current_date_timestamp, 0,$project_guid);
 }
 
 function get_employee_profile_completion_status($employee) {
     $emergency_contact = get_emergency_contact_by_user_guid($contractor->guid);
-    // certificate checking commented
-    //$trade_cert = get_certificate_by_type(CERTIFICATE_TYPE_TRADE, $contractor->guid);
-    //$license_cert = get_certificate_by_type(CERTIFICATE_TYPE_LICENSE, $contractor->guid);
-    //$insurance_cert =  get_certificate_by_type(CERTIFICATE_TYPE_INSURANCE, $contractor->guid);
     if ($employee->state == "" || $employee->town == "" || $employee->postcode == "" || $employee->lastname == "" || $employee->street1 == "" || (count($emergency_contact) == 0)) {
-        //echo  $employee->guid."|---|".$employee->name." ".$employee->lastname."|---|".$employee->state."|---|".$employee->town."|--|".$employee->postcode."|---|".$employee->lastname."|---|".$employee->street1."|---|".count($emergency_contact)."<br />";
         return true;
     }
     return false;
+}
+
+function check_and_create_paint_alerts($paint_guid){
+    $paint = get_entity($paint_guid);
+    if($paint->quantity < $paint->threshold){
+        $search_arr = array(
+		'types' => 'object',
+		'subtypes' => 'material_alerts',
+		'limit' => ELGG_ENTITIES_NO_VALUE
+        );
+
+	$search_arr['metadata_name_value_pairs'][] = array(
+			'name' => "is_active",
+			'value' => 1,
+			'operand' => '='
+	);
+        $alerts = elgg_get_entities_from_metadata($search_arr);
+        if(!$alerts){
+            $alert = new ElggObject();
+            $alert->title = $paint->title;
+            $alert->material_guid = $paint->guid;
+            $alert->material_type = "paint";
+            $alert->is_active = 1;
+            $alert->save();
+        }
+    }
+}
+
+function check_and_remove_paint_alerts($paint_guid){
+    $paint = get_entity($paint_guid);
+    if($paint->quantity > $paint->threshold){
+        $search_arr = array(
+		'types' => 'object',
+		'subtypes' => 'material_alerts',
+		'limit' => ELGG_ENTITIES_NO_VALUE
+        );
+	$search_arr['metadata_name_value_pairs'][] = array(
+			'name' => "is_active",
+			'value' => 1,
+			'operand' => '='
+	);
+        $search_arr['metadata_name_value_pairs'][] = array(
+			'name' => "material_guid",
+			'value' => $paint_guid,
+			'operand' => '='
+	);
+        $alerts = elgg_get_entities_from_metadata($search_arr);
+        if($alerts){
+            $alert = get_entity($alerts[0]->guid);
+            $alert->is_active = 0;
+            $alert->save();
+        }
+    }
 }
 
 function checkout_employee_from_site($site_guid, $user_guid) {
