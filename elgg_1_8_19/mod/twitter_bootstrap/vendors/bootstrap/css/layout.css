@@ -501,7 +501,6 @@ table.mgr_list tr td a i{margin-right: 5px;}
     min-height: 17px;
     font-size: 10px !important;
     line-height: 17px;
-    display: none;
 }
 .qst_row{margin-bottom: 10px; overflow: hidden; line-height: normal; }
 .add_qst_wrap .ans_col1{width: 30%; line-height: normal;}

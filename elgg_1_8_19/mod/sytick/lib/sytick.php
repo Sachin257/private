@@ -35,7 +35,7 @@ function get_employee_profile_completion_status($employee) {
 
 function check_and_create_paint_alerts($paint_guid){
     $paint = get_entity($paint_guid);
-    if($paint->quantity < $paint->threshold){
+    if((int)$paint->quantity < (int)$paint->threshold){
         $search_arr = array(
 		'types' => 'object',
 		'subtypes' => 'material_alerts',
@@ -50,13 +50,32 @@ function check_and_create_paint_alerts($paint_guid){
         $alerts = elgg_get_entities_from_metadata($search_arr);
         if(!$alerts){
             $alert = new ElggObject();
+            $alert->subtype = "material_alerts";
             $alert->title = $paint->title;
             $alert->material_guid = $paint->guid;
             $alert->material_type = "paint";
+            $alert->quantity = $paint->quantity;
             $alert->is_active = 1;
             $alert->save();
         }
     }
+}
+
+function get_number_of_alerts(){
+    $search_arr = array(
+        'types' => 'object',
+        'subtypes' => 'material_alerts',
+        'count' => TRUE,
+        'limit' => ELGG_ENTITIES_NO_VALUE
+    );
+
+    $search_arr['metadata_name_value_pairs'][] = array(
+        'name' => "is_active",
+        'value' => 1,
+        'operand' => '='
+    );
+    $count = elgg_get_entities_from_metadata($options);
+    return $count;
 }
 
 function check_and_remove_paint_alerts($paint_guid){

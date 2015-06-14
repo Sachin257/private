@@ -27,7 +27,7 @@ $paint->title = $title;
 $paint->paint_id = $unique_id;
 $paint->colour = $colour;
 $paint->price = $price;
-$paint->quantity = $quantity + $additional;
+$paint->quantity = $quantity;
 $paint->threshold = $threshold;
 
 $paint->is_deleted = 0;

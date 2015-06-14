@@ -38,7 +38,7 @@
                     echo elgg_echo("paint:quantity");
                     $disabled = FALSE;
                 } ?></label>
-   <?php echo elgg_view('input/text', array('name' => 'quantity', "id"=>"paint_quantity" , 'value' => $vars["entity"]->quantity , 'disabled' => $disabled)); ?>
+   <?php echo elgg_view('input/text', array('name' => 'quantity', "id"=>"paint_quantity" , 'value' => $vars["entity"]->quantity , 'readonly' => $disabled)); ?>
     <span class="error_msg clear paint_quantity_err"></span>
 </div>
 <?php if ($vars["entity"]->guid) { ?>

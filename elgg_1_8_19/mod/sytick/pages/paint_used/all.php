@@ -5,7 +5,6 @@ elgg_register_title_button();
 
 $limit = get_input('limit', SYTICK_PAGINATION_LIMIT);
 $offset = get_input('offset', 0);
-$s = get_sanitised_input('s');
 
 if($segments[1])
 {
@@ -35,10 +34,6 @@ if(count($paint_used_entities)){
 }
 
 if(count($paint_used_entities_ids)){
-	if($s != "")
-	{
-		$paint_used_entities_ids = get_paint_search($s, join($paint_used_entities_ids,",") );
-	}
 	if(count($paint_used_entities_ids)){
 		$options = array(
 				'type' => 'object',

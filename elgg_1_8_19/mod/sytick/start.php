@@ -86,6 +86,7 @@ function sytick_init() {
     elgg_register_page_handler('sitemanager', 'sytick_sitemanager_page_handler');
     elgg_register_page_handler('project_manager', 'sytick_project_manager_page_handler');
     elgg_register_page_handler('paint_used', 'sytick_paint_used_page_handler');
+    elgg_register_page_handler('material_alerts', 'sytick_material_alerts_page_handler');
 
     elgg_register_action("user/save", elgg_get_plugins_path() . "sytick/actions/user/save.php");
     elgg_register_action("user/emergency", elgg_get_plugins_path() . "sytick/actions/user/emergency.php");
@@ -152,6 +153,10 @@ function sytick_page_handler($segments) {
     }
 
     return true;
+}
+
+function sytick_material_alerts_page_handler($segments){
+    include elgg_get_plugins_path() . 'sytick/pages/material_alerts/all.php';
 }
 
 function sytick_user_page_handler($segments) {
