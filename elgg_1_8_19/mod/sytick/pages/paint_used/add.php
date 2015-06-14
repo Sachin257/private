@@ -17,7 +17,7 @@ $paint_entities = elgg_get_entities_from_metadata($search_arr);
 $vars = array();
 $name_arr = array("" => "Select");
 foreach ($paint_entities as $paint_entity){
-    $name_arr[$paint_entity->guid] = $paint_entity->title . " - " .$paint_entity->paint_id;
+    $name_arr[$paint_entity->guid] = $paint_entity->title . " - " .$paint_entity->paint_id . " - " . $paint_entity->colour;
 }
 $vars["paints"] = $name_arr;
 $content = elgg_view_title($title);

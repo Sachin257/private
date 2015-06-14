@@ -363,7 +363,7 @@ p.sTitle{padding-right:0;}
 }
 .dahsboard .list_wrap{height: 197px;}
 .dahsboard .alerts{border:0 !important;}
-.dahsboard ul{margin: 0;}
+.dahsboard ul{margin: 0; overflow-y: scroll;}
 .dahsboard ul li{
     text-align: left;
     font-size: 13px;

@@ -45,6 +45,14 @@ switch($process){
                 $employee = get_input('employee_name');
                 $shift = get_input("shift");
                 $project = get_entity($project_guid);
+                if(!isset($project->nopiecesleft)){
+                    $project->nopiecesleft = $project->nopieces;
+                }
+                if($project->nopiecesleft < $no_of_pieces){
+                    $result['status'] = -1;
+                    register_error("Please check your entry and try again");
+                    break;
+                }
                 
                 $entity = get_entity($paint_guid);
                 if (elgg_instanceof($entity, 'object', 'paint')) {
@@ -68,6 +76,7 @@ switch($process){
                 if($dailyWork_guid)
                 {
                     add_entity_relationship($project->guid, "project_of_daily_log", $dailyWork_guid);
+                    $project->nopiecesleft = $project->nopiecesleft - $no_of_pieces;
                 }
                 } 
                 else {

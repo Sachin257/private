@@ -2947,6 +2947,7 @@ elgg.sytick.init = function() {
 		        			show_messages(obj_data.system_messages.success);
 		        			window.location.reload();
 		        		} else {
+                                                $("#daily_log_add").hide();
 		        			show_messages(obj_data.system_messages.error);
 		        			//var err = obj_data.system_messages.error;
 		        			//jQuery("."+class_str).html(err[0]);        			

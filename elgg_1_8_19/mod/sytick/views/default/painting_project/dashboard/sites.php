@@ -41,6 +41,14 @@ $url = "javascript:void(0)";
                                     echo "&nbsp;&nbsp;&nbsp;&nbsp;";
                                     
                                     echo $paint->colour;
+                                    
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+                                    
+                                    echo $_daily_log->employee;
+                                    
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+                                    
+                                    echo $_daily_log->shift;
                                 
 				if( date('d-m-Y',$_daily_log->time_created) == date('d-m-Y',date('U')) ){
 				?>
