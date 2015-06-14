@@ -1629,6 +1629,12 @@ elgg.sytick.init = function() {
 		} else if(paint_flg){
 			jQuery(".paint_amount_err").html("");
 		}
+                if( !$.isNumeric(jQuery('#paint_amount1').val()) || jQuery('#paint_amount1').val() < 0 ){
+			jQuery(".paint_amount_err").html(elgg.echo("paint:price:notnumber:error"));
+			paint_flg = false;
+		} else if(paint_flg){
+			jQuery(".paint_amount_err").html("");
+		}
 		if(paint_flg  == false){
                     event.preventDefault();
                     return false;

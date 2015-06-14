@@ -13,9 +13,15 @@
         <span class="error_msg clear paint_id_name_err"></span>
     </div>
 
-    <div class="span5">
-        <label><?php echo elgg_echo("paint:amount"); ?></label>
+    <div class="span5" style="width: 200px;">
+        <label><?php echo elgg_echo("paint:amount1"); ?></label>
         <?php echo elgg_view('input/text', array('name' => 'paint_amount', "id" => "paint_amount")); ?>
+        <span class="clear error_msg paint_amount_err"></span>
+    </div>
+    
+    <div class="span5" style="width: 200px;">
+        <label><?php echo elgg_echo("paint:amount2"); ?></label>
+        <?php echo elgg_view('input/text', array('name' => 'paint_amount1', "id" => "paint_amount1")); ?>
         <span class="clear error_msg paint_amount_err"></span>
     </div>
     

@@ -73,7 +73,8 @@ header("Content-type: text/html; charset=UTF-8");
 			</div>
 		</div>
 	</div>
-    <div class="home_slider">
+    <?php $img_ul = elgg_get_site_url().'/mod/twitter_bootstrap/vendors/bootstrap/img/bright_wallpaper.jpg';?>
+    <div class="home_slider" style="height: 600px; background-image: url(<?php echo $img_ul;?>);">
            <?php if($tb_head){ echo $tb_head; }?>
 		<div class="container">
 			<div class="row">

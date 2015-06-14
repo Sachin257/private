@@ -47,6 +47,11 @@ function check_and_create_paint_alerts($paint_guid){
 			'value' => 1,
 			'operand' => '='
 	);
+        $search_arr['metadata_name_value_pairs'][] = array(
+			'name' => "material_guid",
+			'value' => $paint_guid,
+			'operand' => '='
+	);
         $alerts = elgg_get_entities_from_metadata($search_arr);
         if(!$alerts){
             $alert = new ElggObject();

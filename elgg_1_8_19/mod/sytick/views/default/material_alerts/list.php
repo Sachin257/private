@@ -16,12 +16,12 @@ $offset = elgg_extract('offset', $vars);
                         <th><?php echo elgg_echo('material:name') ?></th>
                         <th><?php echo elgg_echo('material:type') ?></th>
                         <th><?php echo elgg_echo('material_alerts:used:quantity') ?></th>
-                        <th><?php echo "Alert Response"?></th>
+                        <th><?php echo "Responded on"?></th>
                     </tr>
                     <?php foreach ($material_alerts_entities as $material_alerts_entitie) {
                         $response = "No";
                         if($material_alerts_entitie->response){
-                            $response = "Yes";
+                            $response = date("d-m-Y", $material_alerts_entitie->last_action);
                         }
                         if($material_alerts_entitie->is_active){
                         ?>

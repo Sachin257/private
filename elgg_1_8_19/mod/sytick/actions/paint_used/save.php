@@ -2,7 +2,7 @@
 
 // get the form inputs
 $paint_guid = get_input('paint_id_name');
-$quantity = get_input('paint_amount') ;
+$quantity = get_input('paint_amount') - get_input('paint_amount1') ;
 $colour = get_input('colour');
 $unique_id = get_input('paint_id');
 $name = get_input('title');
