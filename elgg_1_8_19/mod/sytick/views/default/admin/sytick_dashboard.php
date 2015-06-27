@@ -4,9 +4,11 @@
         <div class="span4 adm_stats nest_wrap">
             <div class="adm_sites" style="width:100%">
                 <?php echo "INVENTORY"?> <a href="/paint/add/" class="circle">+</a>
-                <span class="st_count"><a href="/paint/all"><?= $vars["paints"];?></a></span>
+                <span class="st_count" style="height: 37px;">
+                    <a href="/paint/all" style="font-size: 20px;">Paints</a>
+                    <a href="/material_type/all" style="font-size: 20px; margin-left: 40px;">Other Materials</a>
+                </span>
             </div>
-            <div class="adm_statbar column_right"></div>
             <div class="nest_wrap site_status status">
                 <div class="site_statcount column_left"></div>
                 <div class="stat_text column_right"></div>
@@ -39,11 +41,11 @@
     <div class="adm_secicons">
         <ul class="nest_wrap">
             <li><a href="#"><span class="ic_settings circle"></span>Daily Settings</li>
-            <li><a href="/admin"><span class="ic_admaccoutns circle"></span>Administration<br />Accounts</a></li>
+            <!--<li><a href="/admin"><span class="ic_admaccoutns circle"></span>Administration<br />Accounts</a></li>-->
             <li><a href="#"><span class="ic_induction circle"></span>Alert<br />Settings</a></li>
             <li><a href="#"><span class="ic_evemanager circle"></span>Calculations</a></li>
             <li><a href="#"><span class="ic_mgmaccount circle"></span>Efficency<br />Settings</a></li>
-            <!--<li><a href="#"><span class="ic_useraccount circle"></span><?php //echo elgg_echo("entity:Securities"); ?></a></li>-->
+            <li><a href="#"><span class="ic_useraccount circle"></span>Employees</a></li>
             <li><a href="/paint_used"><span class="ic_reports circle"></span>Paint Usage</li>
         </ul>
     </div>
