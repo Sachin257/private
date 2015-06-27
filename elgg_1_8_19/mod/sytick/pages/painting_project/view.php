@@ -36,7 +36,7 @@ $paint_entities = elgg_get_entities_from_metadata($search_arr);
 $paint_arr = array(""=> "Select");
 foreach ($paint_entities as $paint_entitie)
 {
-        $paint_arr[$paint_entitie->guid]=$paint_entitie->title;
+        $paint_arr[$paint_entitie->guid]= $paint_entitie->title . " - " .$paint_entitie->paint_id . " - " . $paint_entitie->colour;
 }
 $vars["paints"] = $paint_arr;
 $title = elgg_echo('project:dashboard:title');

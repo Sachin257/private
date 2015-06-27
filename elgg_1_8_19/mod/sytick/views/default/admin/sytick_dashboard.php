@@ -3,8 +3,8 @@
     <div class="adm_row nest_wrap">
         <div class="span4 adm_stats nest_wrap">
             <div class="adm_sites" style="width:100%">
-                <?php echo "SUMMARY";?>  <a href="#" class="circle">x</a>
-                <span class="st_count"><a href="#"></a></span>
+                <?php echo "INVENTORY"?> <a href="/paint/add/" class="circle">+</a>
+                <span class="st_count"><a href="/paint/all"><?= $vars["paints"];?></a></span>
             </div>
             <div class="adm_statbar column_right"></div>
             <div class="nest_wrap site_status status">
@@ -14,8 +14,8 @@
         </div>
         <div class="span4 nest_wrap">
             <div class="cnt_cmp" style="width:100%">
-                <?php echo "PROJECTS";?>  <a href="/painting_project/add/" class="circle">+</a>
-                <span class="st_count"><a href="/painting_project/all"><?=$vars["painting_projects"]; ?></a></span>
+                <?php echo "PROJECTS";?>  <a href="/project/add/" class="circle">+</a>
+                <span class="st_count"><a href="/project/all"><?=$vars["projects"]; ?></a></span>
             </div>
             <div class="adm_statbar column_right"></div>
             <div class="nest_wrap cntr_workstatus status">
@@ -25,8 +25,8 @@
         </div>
         <div class="span4">
             <div class="cntr_work" style="width:100%">
-                <?php echo "INVENTORY"?> <a href="/paint/add/" class="circle">+</a>
-                <span class="st_count"><a href="/paint/all"><?= $vars["paints"];?></a></span>
+                <?php echo "PAINTING PROJECTS";?>  <a href="/painting_project/add/" class="circle">+</a>
+                <span class="st_count"><a href="/painting_project/all"><?=$vars["painting_projects"]; ?></a></span>
             </div>
             <div class="adm_statbar column_right"></div>
             <div class="nest_wrap cntr_workstatus status">
@@ -43,8 +43,8 @@
             <li><a href="#"><span class="ic_induction circle"></span>Alert<br />Settings</a></li>
             <li><a href="#"><span class="ic_evemanager circle"></span>Calculations</a></li>
             <li><a href="#"><span class="ic_mgmaccount circle"></span>Efficency<br />Settings</a></li>
-            <li><a href="#"><span class="ic_useraccount circle"></span><?php //echo elgg_echo("entity:Securities"); ?></a></li>
-            <li><span class="ic_reports circle"></span>Reports</li>
+            <!--<li><a href="#"><span class="ic_useraccount circle"></span><?php //echo elgg_echo("entity:Securities"); ?></a></li>-->
+            <li><a href="/paint_used"><span class="ic_reports circle"></span>Paint Usage</li>
         </ul>
     </div>
     <div class="clear"></div>

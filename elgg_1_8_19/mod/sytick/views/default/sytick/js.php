@@ -1603,7 +1603,43 @@ elgg.sytick.init = function() {
 	});
         
         
-        
+        jQuery("#btn_paint_used_save").live("click", function (event) {	
+		var paint_flg = true;
+		if( jQuery('#paint_name').val() == null || jQuery('#paint_name').val() == ""){
+			jQuery(".paint_id_name_err").html("Select a valid paint.");
+			paint_flg = false;
+		} else {
+			jQuery(".paint_id_name_err").html("");
+		}
+                if( jQuery('#paint_name').val() == null || jQuery('#paint_name').val() == ""){
+			jQuery(".paint_id_name_err").html("Select a valid paint.");
+			paint_flg = false;
+		} else {
+			jQuery(".paint_id_name_err").html("");
+		}
+                if( parseInt(jQuery('#paint_amount').val()) > parseInt(jQuery('#paint_quantity').val()) ){
+                        jQuery(".paint_amount_err").html('Amount used cannot be greater than current stock.');
+                        paint_flg = false;
+                } else {
+                        jQuery(".paint_amount_err").html("");
+                }
+                if( !$.isNumeric(jQuery('#paint_amount').val()) || jQuery('#paint_amount').val() < 0 ){
+			jQuery(".paint_amount_err").html(elgg.echo("paint:price:notnumber:error"));
+			paint_flg = false;
+		} else if(paint_flg){
+			jQuery(".paint_amount_err").html("");
+		}
+                if( !$.isNumeric(jQuery('#paint_amount1').val()) || jQuery('#paint_amount1').val() < 0 ){
+			jQuery(".paint_amount_err").html(elgg.echo("paint:price:notnumber:error"));
+			paint_flg = false;
+		} else if(paint_flg){
+			jQuery(".paint_amount_err").html("");
+		}
+		if(paint_flg  == false){
+                    event.preventDefault();
+                    return false;
+		} 
+	});
 
           jQuery("#btn_paint_save").live("click", function (event) {	
 		var paint_flg = true;
@@ -1643,16 +1679,23 @@ elgg.sytick.init = function() {
 		} else {
 			jQuery(".paint_quantity_err").html("");
 		}
-                if( !$.isNumeric(jQuery('#paint_additional').val()) || jQuery('#paint_additional').val() < 0 ){
-			jQuery(".paint_additional_err").html(elgg.echo("paint:price:notnumber:error"));
-			paint_flg = false;
-		} else {
-			jQuery(".paint_additional_err").html("");
-		}
-		if(paint_flg  == false)
-		{
-			event.preventDefault();
-			return false;
+                if(jQuery('#paint_additional').length > 0){
+                    if( !$.isNumeric(jQuery('#paint_additional').val()) || jQuery('#paint_additional').val() < 0 ){
+                        jQuery(".paint_additional_err").html(elgg.echo("paint:price:notnumber:error"));
+                        paint_flg = false;
+                    } else {
+                        jQuery(".paint_additional_err").html("");
+                    }
+                }
+                if( !$.isNumeric(jQuery('#alert_threshold').val()) || jQuery('#alert_threshold').val() < 0 ){
+                    jQuery(".alert_threshold_err").html(elgg.echo("paint:price:notnumber:error"));
+                    paint_flg = false;
+                } else {
+                    jQuery(".alert_threshold_err").html("");
+                }
+		if(paint_flg  == false){
+                    event.preventDefault();
+                    return false;
 		} 
 	});
               
@@ -2212,7 +2255,7 @@ elgg.sytick.init = function() {
 		event.preventDefault();
 		return false;	
 	});
-	
+        
         jQuery("#inventory_type_select").live("change", function (event) {
 	         if(jQuery(this).val() != "" && jQuery(this).val() != "")
                     {
@@ -2250,7 +2293,67 @@ elgg.sytick.init = function() {
                     }
         
          });
-        
+         
+        jQuery("#paint_id_name").on("change", function (event) {
+	         if(jQuery(this).val() != "")
+                    {
+                        $("#item_name").next(".holder").html("");
+                        var postData = "paint_guid="+jQuery(this).val();
+                        var __elgg_ts =	elgg.security.token.__elgg_ts;
+			var __elgg_token =	elgg.security.token.__elgg_token;
+                        jQuery.ajax( {
+			    type: "POST",
+			    url : '/action/sytick/ajax/home',
+			    data : postData+"&process=get_paint_details&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data){
+			        	var obj_data = jQuery.parseJSON( data );
+			        	var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+			        	if(call_status != -1 ){	        			
+		        			$("#paint_name").val(obj_data.output.paint_name);
+                                                $("#paint_id").val(obj_data.output.paint_id);
+                                                $("#paint_color").val(obj_data.output.colour);
+                                                $("#paint_quantity").val(obj_data.output.quantity);
+		        		} else {
+                                                $(".paint_id_name_err").text("You may have lost your connection.");
+		        			$("#paint_name").val("");
+                                                $("#paint_id").val("");
+                                                $("#paint_color").val("");
+                                                $("#paint_quantity").val("");
+		        		}		        	
+		        	}
+			    });    
+                    }else{
+                        $("#paint_name").val("");
+                        $("#paint_id").val("");
+                        $("#paint_color").val("");
+                        $("#paint_quantity").val("");
+                    }
+         });
+         
+         jQuery(".respond_alert").on("click", function(){
+            var alert =  $(this).attr("data-guid");
+            if($(this).text() == "No"){
+                $(this).text("Yes");
+            
+            var postData = "alert="+alert;
+            var __elgg_ts = elgg.security.token.__elgg_ts;
+            var __elgg_token =	elgg.security.token.__elgg_token;
+                        jQuery.ajax( {
+			    type: "POST",
+			    url : '/action/sytick/ajax/home',
+			    data : postData+"&process=change_alert_response&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data){
+                                    var obj_data = jQuery.parseJSON( data );
+                                    var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+                                    if(call_status != -1 ){	        			
+                                  
+                                    }		        	
+		        	}
+			    });  
+              }
+         });
          
 	jQuery("#sites_company_id, #quest_company_id, #induct_company_id").live("change", function (event) {
 		  if(jQuery(this).val() != "" && elgg.is_admin_logged_in())
@@ -2844,6 +2947,7 @@ elgg.sytick.init = function() {
 		        			show_messages(obj_data.system_messages.success);
 		        			window.location.reload();
 		        		} else {
+                                                $("#daily_log_add").hide();
 		        			show_messages(obj_data.system_messages.error);
 		        			//var err = obj_data.system_messages.error;
 		        			//jQuery("."+class_str).html(err[0]);        			

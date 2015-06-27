@@ -27,6 +27,7 @@ if ($paint_guid) {
 $paint->subtype = "painting_project";
 $paint->title = $title;
 $paint->nopieces = $nopieces;
+$paint->nopiecesleft = $nopieces;
 $paint->lengthperpiece = $lengthperpiece;
 $paint->material_id = $material_id;
 
@@ -34,18 +35,7 @@ $paint->is_deleted = 0;
 $paint->access_id = ACCESS_PUBLIC;
 $paint->owner_guid = elgg_get_logged_in_user_guid();
 $paint_guid = $paint->save();
-//if ($paint_guid) {
-//    $old_material = get_material_id_by_proj_guid($paint_guid);
-//    $old_material_id = $old_material->guid;
-//    if ($old_material_id != $material_id || $old_material_id=="") {
-//        remove_entity_relationship($old_material_id, "material_of_project", $paint_guid);
-//        add_entity_relationship($material_id, "material_of_project", $paint_guid);
-//    }
-//} else {
-//    if ($material_id) {
-//        add_entity_relationship($material_id, "material_of_project", $paint_guid);
-//    }
-//}
+
 if ($paint_guid) {
     system_message(elgg_echo("paint:message:saved"));
     if ($flag == "" ){

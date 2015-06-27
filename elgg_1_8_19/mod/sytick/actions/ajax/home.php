@@ -45,6 +45,14 @@ switch($process){
                 $employee = get_input('employee_name');
                 $shift = get_input("shift");
                 $project = get_entity($project_guid);
+                if(!isset($project->nopiecesleft)){
+                    $project->nopiecesleft = $project->nopieces;
+                }
+                if($project->nopiecesleft < $no_of_pieces){
+                    $result['status'] = -1;
+                    register_error("Please check your entry and try again");
+                    break;
+                }
                 
                 $entity = get_entity($paint_guid);
                 if (elgg_instanceof($entity, 'object', 'paint')) {
@@ -68,6 +76,7 @@ switch($process){
                 if($dailyWork_guid)
                 {
                     add_entity_relationship($project->guid, "project_of_daily_log", $dailyWork_guid);
+                    $project->nopiecesleft = $project->nopiecesleft - $no_of_pieces;
                 }
                 } 
                 else {
@@ -124,6 +133,12 @@ switch($process){
 			forward(REFERER);
 		}
 		break;
+        case "change_alert_response":
+                $alert_id = get_input('alert');
+                $alert = get_entity($alert_id);
+                $alert->response = 1;
+                $alert->save();
+                break;
 	case "getsitesformfields":
 		// check username
 		$company_id = get_sanitised_input('company_id');
@@ -177,11 +192,18 @@ switch($process){
                                     'operand' => '='
                     );
                 $entities = elgg_get_entities_from_metadata($search_arr);
-//                print_r($paint_entities);exit;
                 }else{
                     echo $inventory_type;exit;
                 }
                 $result['roles'] = $entities;
+                break;
+        case "get_paint_details":
+                $paint_guid = get_sanitised_input('paint_guid');
+                $paint = get_entity($paint_guid);
+                $result['paint_name'] = $paint->title;
+                $result['paint_id'] = $paint->paint_id;
+                $result['colour'] = $paint->colour;
+                $result['quantity'] = $paint->quantity;
                 break;
 	case "activateemployee":
 		$user_guid = get_input('u');

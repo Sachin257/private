@@ -14,5 +14,6 @@ $url = "#";
     <span class="dsh_arrow"></span>
     <label class="cntname MT_three"><?php echo $vars['entity']->trading_name;?></label>
     <label style="color: black;">No: of Pieces:<?php echo $vars['entity']->nopieces;?></label>
+    <label style="color: black;">No: of Pieces left:<?php echo $vars['entity']->nopiecesleft;?></label>
     <label style="color: black;">Length per piece:<?php echo $vars['entity']->lengthperpiece;?></label>
     

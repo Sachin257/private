@@ -32,60 +32,8 @@ $profile_icon = elgg_view('output/img', array(
 		'class' => '',
 		'style' => "border-radius:50%;",
 ));}
-/*
-if(elgg_is_logged_in()){
-//required for responsive
-echo <<<HTML
-		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-         </a>
-HTML;
 
-}
-
-
-//output site title
-echo '<a href="'.$site_url.'" class="brand">'.$site_name.'</a>';
-
-//personal dropdown menu
-echo <<<HTML
-		<div class="btn-group pull-right"><!--open button group -->
-		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">$username <span class="caret"></span></a>	
-HTML;
-
-//dropdown contents
-echo '<ul class="dropdown-menu">';
-
-if(elgg_is_logged_in()){
-	foreach ($alt_items as $menu_item) {
-		echo elgg_view('navigation/menu/elements/item', array('item' => $menu_item));
-	}
-
-	if ($more_items) {
-		echo elgg_view('navigation/menu/elements/section', array(
-			'class' => 'elgg-menu elgg-menu-site elgg-menu-site-more dropdown-menu', 
-			'items' => $more_items,
-		));
-		echo '<li class="divider"></li>';
-	}
-}else{
-	echo '<li class="dropdown" style="padding:10px">';
-	echo elgg_view_form('login');
-	echo '</li>';
-}
-echo '</ul>';
-echo '</div><!-- /button group -->';
-
-//create the logo and tools menu
-echo '<div class="nav-collapse nav-collapse-margin-issue">';
-echo '<ul class="nav">';
-foreach ($default_items as $menu_item) {
-	echo elgg_view('navigation/menu/elements/item', array('item' => $menu_item));
-}
-echo '</ul>';
-echo '</div>';*/
+$alerts = get_number_of_alerts();
 
 ?>
 
@@ -127,7 +75,7 @@ echo '</div>';*/
             <ul>
                 <li><a href="/action/logout" class="logout">LOGOUT</a></li>
                 <li><a href="/user/<?php echo $user->username?>/change_password" class="settings">SETTINGS</a></li>
-                <li><a href="" class="alrt"><sup class="circle">2</sup>ALERTS</a></li>
+                <li><a href="/material_alerts" class="alrt"><?php if($alerts){ ?><sup class="circle"><?php echo $alerts;?></sup><?php } ?> ALERTS</a></li>
                 <li><a href="/user/<?php echo $user->username?>" <?php if(!$profile_icon){?>class="acount" <?php }?> ><span><?php if($profile_icon){
     echo $profile_icon;
 }
@@ -146,7 +94,7 @@ echo '</div>';*/
                 </div>
             <ul>
                 <li><a href="/user/<?php echo $user->username?>" class="acount">ACCOUNT</a></li>
-                <li><a href="" class="alrt"><sup class="circle">2</sup>ALERTS</a></li>
+                <li><a href="/material_alerts" class="alrt"><?php if($alerts){ ?><sup class="circle"><?php echo $alerts;?></sup><?php } ?> ALERTS</a></li>
                  <li><a href="/user/<?php echo $user->username?>/change_password" class="settings">SETTINGS</a></li>
                 <li><a href="/action/logout" class="logout">LOGOUT</a></li>
             </ul>

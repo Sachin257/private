@@ -1,6 +1,10 @@
 body{
     color: black !important;
 }
+.home_slider{
+    background-image: url("/mod/twitter_bootstrap/vendors/bootstrap/img/bright_wallpaper.png");
+}
+
 .navbar-inner{
     background-color: #3a5795 !important;
     background-image: none !important;
