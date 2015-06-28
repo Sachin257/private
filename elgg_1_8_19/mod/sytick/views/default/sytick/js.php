@@ -1383,6 +1383,10 @@ elgg.sytick.init = function() {
               window.location.href = "/painting_project/all?s="+encodeURIComponent(ser);
           }
         });
+        $("#material_drpdown").live("change", function(e){
+              var ser = $(this).val();
+              window.location.href = "/painting_project/all?m="+encodeURIComponent(ser);
+        });
         $( document ).ready(function() {
             
             if($("#abn").val() == "")

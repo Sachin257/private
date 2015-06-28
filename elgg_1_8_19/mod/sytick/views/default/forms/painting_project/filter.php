@@ -15,7 +15,7 @@ $s = get_sanitised_input('s')
     <span>Material : </span><?php
     echo elgg_view("input/dropdown", array(
         "name" => "material_id",
-        "id" => "material_id",
+        "id" => "material_drpdown",
         "options_values" => $vars["materials"],
     ));
     ?>
