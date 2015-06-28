@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td height="40">&nbsp;</td>
-    <td>An account has been created by the <strong>Sytick team.</strong></td>
+    <td>An account has been created by the <strong>Stad team.</strong></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -27,7 +27,7 @@
   </tr>
   <tr>
     <td height="40">&nbsp;</td>
-    <td><a href="#" style="color:#069; text-decoration:none;">http://www.sytick.com/test/45778855/</a></td>
+    <td><a href="#" style="color:#069; text-decoration:none;">http://www.stadit.in</a></td>
     <td>&nbsp;</td>
   </tr>
    <tr>
@@ -44,7 +44,7 @@
         <p><img src="img/email_tick.gif" width="20" height="20" align="absmiddle" style="margin-left:15px; margin-right:10px;" /> Some sample content list item</p>
         <p><img src="img/email_tick.gif" width="20" height="20" align="absmiddle" style="margin-left:15px; margin-right:10px;" /> Some sample content list item</p>
         Thanks, <br>
-        The Sytick team
+        The Stad team
     </td>
     <td>&nbsp;</td>
   </tr>
