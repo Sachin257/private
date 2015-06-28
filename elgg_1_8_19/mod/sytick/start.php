@@ -199,23 +199,7 @@ function stad_user_page_handler($segments) {
             } else {
                 $user_profile_type = get_custom_profile_types($page_user->custom_profile_type, 'guid');
                 $user_profile_type_label = ($user_profile_type && isset($user_profile_type['label'])) ? $user_profile_type['label'] : "";
-                //print '<pre>';print_r($user_profile_type);exit;
-                if ($user_profile_type_label == MANAGER_PROFILE_TYPE) {
-                    include elgg_get_plugins_path() . 'sytick/pages/manager/dashboard.php';
-                } else if ($user_profile_type_label == SITE_MANAGER_PROFILE_TYPE) {
-                    include elgg_get_plugins_path() . 'sytick/pages/manager/dashboard.php';
-                } else if ($user_profile_type_label == CONTRACTOR_PROFILE_TYPE) {
-                    include elgg_get_plugins_path() . 'sytick/pages/user/dashboard.php';
-                } elseif ($user_profile_type_label == SECURITY_PERSON_PROFILE_TYPE) {
-                    elgg_register_js('msdropdown.js', 'mod/twitter_bootstrap/vendors/MSDropdown/jquery.dd.min.js', 'head');
-                    elgg_register_css('msdropdown.css', 'mod/twitter_bootstrap/vendors/MSDropdown/dd.css', 'head');
-                    elgg_register_js('twitter_bootstrap.fancybox', 'mod/twitter_bootstrap/vendors/fancybox/jquery.fancybox.js', 'head');
-                    elgg_register_css('twitter_bootstrap.fancybox', 'mod/twitter_bootstrap/vendors/fancybox/jquery.fancybox.css', 'head');
-                    elgg_register_js('lessonviewer.bootbox', 'mod/lesson/lessonviewer/js-global/bootbox.js', 'head');
-                    include elgg_get_plugins_path() . 'sytick/pages/security_person/dashboard.php';
-                } else {
-                    include elgg_get_plugins_path() . 'sytick/pages/employee/dashboard.php';
-                }
+                include elgg_get_plugins_path() . 'sytick/pages/employee/dashboard.php';
             }
             break;
     }

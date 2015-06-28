@@ -449,6 +449,7 @@ $english = array(
 		'entity:all' => 'All',
 		'entity:in' => 'In',
 		'entity:out' => 'Out',
+                "employee:head" => "Employees",
     		'entity:password' => 'Password',
     		'entity:confirm:password' => 'Confirm Password',
 		'activate_employee:create_password' => 'Create Password',

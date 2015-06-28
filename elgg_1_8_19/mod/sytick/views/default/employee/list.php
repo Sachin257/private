@@ -38,6 +38,13 @@ $profile_type_name = elgg_extract('role_name', $vars);
 						'class' => 'MR_20 elgg-button-edit-information float-alt',
 						'rel' => 'nofollow'
 				));
+                                $delete_url = "/action/employee/delete/?guid={$_employee->guid}&offset=$offset";
+                                echo elgg_view('output/confirmlink', array(
+                                                'href' => $delete_url,
+                                                'text' => elgg_echo('entity:delete'),
+                                                'title' => 'Delete',
+                                                'class' => 'elgg-button-delete float-alt'
+                                ));
 				?>
 			</td>
 		</tr>
