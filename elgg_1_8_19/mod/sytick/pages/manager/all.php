@@ -3,7 +3,7 @@
 // need to restrict for company managers and admin
 gatekeeper();
 
-$limit = get_input('limit', SYTICK_PAGINATION_LIMIT);
+$limit = get_input('limit', STAD_PAGINATION_LIMIT);
 $offset = get_input('offset', 0);
 $s = get_sanitised_input('s');
 

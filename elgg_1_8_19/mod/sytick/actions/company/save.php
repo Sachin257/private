@@ -62,7 +62,7 @@ if ($company_guid){
 
 	if (!empty($_FILES[$file_upload_field]['name']))
 	{
-		if($_FILES[$file_upload_field]['size'] > SYTICK_MAX_IMG_SIZE ){
+		if($_FILES[$file_upload_field]['size'] > STAD_MAX_IMG_SIZE ){
 			$result['output']['error_field'] = $file_upload_field;
 			$result['system_messages']['error'] =array( elgg_echo('certificate:error:image_size') );;
 			$result['system_messages']['success'] = array();

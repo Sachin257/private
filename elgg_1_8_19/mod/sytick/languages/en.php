@@ -1,6 +1,6 @@
 <?php
 /**
- * sytickplugin English language strings
+ * stadplugin English language strings
 *
 */
 
@@ -61,13 +61,12 @@ $english = array(
 		'registration:firstname:err' => 'Enter First name.',
 		'registration:lastname:err' => 'Enter last name.',
 		'registration:success' => 'Account Registration is Successful',
-		'registration:success:line1' => 'Thank you for registering for a Sytick account.',
+		'registration:success:line1' => 'Thank you for registering for a Stad account.',
 		'registration:success:line2' => 'The registration is nearly complete.',
 		'registration:success:line3' => '<strong>To activate your account, please click the activation link in the activation email which has been sent to you. If you do not see the activation email in your inbox, you may need to check your spam / junk email folders.</strong>',
-		'registration:success:line4' => 'If you are still unable to see it, we can resend the activation email to you. Please add<br /> <strong>donotreply@sytick.com</strong> to your address book to help with our emails not being detected as<br /> spam, and then click <span class="acknow_hilite"><strong>Resend activation email</strong></span> below.',
 		'registration:resend:email' => 'Resend',
 		'registeration:user:activated' => 'User already activated.',
-		'registration:baduser' => 'User not registered with Sytick.',
+		'registration:baduser' => 'User not registered with Stad.',
 		'registration:user:activation:success' => 'User activation email send.',
 		'forgotpasssword:title' => 'Can’t Sign in? Forgot your password?',
                 'forgotpasssword:smallcap:title' => 'Enter your email address below and we will send you a password reset link.',
@@ -238,14 +237,8 @@ $english = array(
                  							Your password must be a minimum of 8 charaters
                  							Will add some more text when I think of it.',
 		'activate:manager:success' => 'Company manager activated.',
-		'company:contact:unique:error' => 'Already a user with sytick, add another one.',
 		'manager:dashboard:title' => 'Manager Dashboard',
-		'admin:dashboard:construction' => 'CONSTRUCTION COMPANIES',
 		'admin:dashboard:pending_text' => 'Pending approval',
-		'admin:dashboard:contracting' => 'CONTRACTING COMPANIES',
-		'admin:dashboard:contractors' => 'CONTRACTORS',
-		'manager:dashboard:sites' => 'SITES',
-		'manager:dashboard:workers' => 'EMPLOYEES',
 		'manager:title:add' => 'Add Manager',
 		'manager:save' => 'Save',
 		'manager:company:error' => 'No company selected',

@@ -1,7 +1,7 @@
 # README #
 
 
-# Sytick Repository #
+# Stad Repository #
 
 This is a private repository and cannot be copied without permission.
 

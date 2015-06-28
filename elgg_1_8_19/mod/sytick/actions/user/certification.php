@@ -86,15 +86,13 @@ $file_guid = get_input('file_guid');
 $file_upload_field = "certificate_upload";
 if (!empty($_FILES[$file_upload_field]['name']))
 {
-	if($_FILES[$file_upload_field]['size'] > SYTICK_MAX_IMG_SIZE ){
+	if($_FILES[$file_upload_field]['size'] > STAD_MAX_IMG_SIZE ){
 		$result['output']['error_field'] = $file_upload_field;
-		$result['system_messages']['error'] = array( elgg_echo('certificate:error:image_size' , array(SYTICK_MAX_IMG_SIZE/ (1000*1000)  )) );
+		$result['system_messages']['error'] = array( elgg_echo('certificate:error:image_size' , array(STAD_MAX_IMG_SIZE/ (1000*1000)  )) );
 		$result['system_messages']['success'] = array();
 		$result['status'] = -1;
 		echo json_encode($result);
 		exit;
-		//register_error(elgg_echo('certificate:error:image_size' , array(SYTICK_MAX_IMG_SIZE/ (1000*1000)  )));
-		//forward(get_input('forward', REFERER));
 	}
 }
 //die($_FILES['certificate_upload']['type']);

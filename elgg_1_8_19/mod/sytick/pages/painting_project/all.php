@@ -3,9 +3,11 @@ gatekeeper();
 elgg_register_title_button();
 
 
-$limit = get_input('limit', SYTICK_PAGINATION_LIMIT);
+$limit = get_input('limit', STAD_PAGINATION_LIMIT);
 $offset = get_input('offset', 0);
 $s = get_sanitised_input('s');
+
+$material_id_values = get_material_type_id_values();
 
 if($segments[1])
 {
@@ -105,7 +107,7 @@ if(count($painting_project_entities_ids)){
 	$pagination = "";
 
 }
-$body .= elgg_view('painting_project/list', array("paint"=>$painting_project_entities , "offset"=>$offset , "uniqueproject" => $uniq_proj));
+$body .= elgg_view('painting_project/list', array("paint"=>$painting_project_entities , "offset"=>$offset , "uniqueproject" => $uniq_proj, "materials" => $material_id_values));
 $body .= $pagination;
 
 $body = elgg_view_layout('one_column', array('title' => $body_title,'content' => $body));

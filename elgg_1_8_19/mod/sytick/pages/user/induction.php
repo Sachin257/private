@@ -6,7 +6,7 @@ elgg_load_js('twitter_bootstrap.fancybox');
 elgg_load_css('twitter_bootstrap.fancybox');
 elgg_load_js('lessonviewer.bootbox');
 
-$limit = get_input('limit', SYTICK_PAGINATION_LIMIT);
+$limit = get_input('limit', STAD_PAGINATION_LIMIT);
 $offset = get_input('offset', 0);
 
 elgg_make_sticky_form('profile:edit');
