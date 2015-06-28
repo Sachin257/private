@@ -1,9 +1,4 @@
 <?php
-/**
- * Delete document_type entity
- *
- * @package sytick
- */
 
 $company_guid = get_sanitised_input('guid');
 $company = get_entity($company_guid);

@@ -5,7 +5,7 @@ $offset = elgg_extract('offset', $vars);
 <div class="clear"></div>
 <div class="cmp_list rounded_corners frm_box_shadow frm_box_border MB_five mgr_listall">
     <div class="search_box nest_wrap "> 
-    <div class="column_right"><?php echo  elgg_view_form("painting_project/filter", array('id'=>'frm_painting_project_search'), $vars);?></div>
+    <div><?php echo  elgg_view_form("painting_project/filter", array('id'=>'frm_painting_project_search'), $vars);?></div>
     </div>
     <div>
     <?php if($painting_project_entities && count($painting_project_entities)) { ?>

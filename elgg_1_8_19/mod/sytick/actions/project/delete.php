@@ -1,9 +1,4 @@
 <?php
-/**
- * Delete project entity
- *
- * @package sytick
- */
 
 $project_guid = get_sanitised_input('guid');
 $project = get_entity($project_guid);

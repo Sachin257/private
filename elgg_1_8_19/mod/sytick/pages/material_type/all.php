@@ -24,31 +24,21 @@ $search_arr = array(
 		'subtypes' => 'material_type',
 		'limit' => ELGG_ENTITIES_NO_VALUE
 );
-//if(!elgg_is_admin_logged_in())
-//{
-	$search_arr['metadata_name_value_pairs'][] = array(
-			'name' => "is_deleted",
-			'value' => 0,
-			'operand' => '='
-	);
-//}
 
 
 $material_type_entities = elgg_get_entities_from_metadata($search_arr);
 
-//print '<pre>';print_r($material_type_entities );print '</pre>';exit;
 if(count($material_type_entities)){
 	foreach($material_type_entities as $_material_type_entities){
 		$material_type_entities_ids[] = $_material_type_entities->guid;
 	}
 }
-//print '<pre>';print_r($material_type_entities_ids );print '</pre>';exit;
+
 $body  = '<div class="title-button-container">' . $add_link . '</div>';
 if(count($material_type_entities_ids)){
 	if($s != "")
 	{
 		$material_type_entities_ids = get_material_type_search($s, join($material_type_entities_ids,",") );
-		//print '<pre>';print_r($project_ids );print '</pre>';exit;
 	}
 	if(count($material_type_entities_ids)){
 		$options = array(
@@ -68,9 +58,6 @@ if(count($material_type_entities_ids)){
 			);
 		}
 		$count = elgg_get_entities_from_metadata($options);
-                //print '<pre>';print_r($count );print '</pre>';exit;
-
-		
 		
 		$options = array(
 				'type' => 'object',
@@ -113,10 +100,8 @@ if(count($material_type_entities_ids)){
 
 $title = elgg_echo('material_type:extra:type') ;
 
-//$body_title = $title . '<div class="title-button-container">' . $add_link .'&nbsp;'. '</div>';
-
 $body .= elgg_view('material_type/list',array("material_type"=>$material_type_entities, "offset"=>$offset));
-               // print '<pre>';print_r($material_type_entities );print '</pre>';exit;
+
 $body .= $pagination;
 
 $body = elgg_view_layout('one_column', array('title' => $body_title,'content' => $body));

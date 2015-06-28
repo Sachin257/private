@@ -11,7 +11,7 @@ $s = get_sanitised_input('s')
     ));
     ?>
 </div>
-<div class="span3" style="float: left;">
+<div class="span4" style="float: left;">
     <span>Material : </span><?php
     echo elgg_view("input/dropdown", array(
         "name" => "material_id",

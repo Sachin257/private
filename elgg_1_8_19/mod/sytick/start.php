@@ -44,20 +44,15 @@ define('CERTIFICATE_TYPE_INSURANCE', 3);
 define('CONSTRUCTION_TYPE_COMPANY', 1);
 define('CONTRACTING_TYPE_COMPANY', 2);
 
-define('SYTICK_PAGINATION_COUNT', 10);
-
 define('STAD_MAX_IMG_SIZE', 4500000);
 
 define('STAD_PAGINATION_LIMIT', 10);
 
 define('AUTO_SAVE_MILLI_SECONDS', 60000);
 
-define('SYTICK_EDITOR_WIDTH', "900px");
-define('SYTICK_EDITOR_HEIGHT', "506px");
+elgg_register_event_handler('init', 'system', 'stad_init');
 
-elgg_register_event_handler('init', 'system', 'sytick_init');
-
-function sytick_init() {
+function stad_init() {
 
     elgg_register_library('elgg:uservalidationbyemail', elgg_get_plugins_path() . 'uservalidationbyemail/lib/functions.php');
     elgg_load_library('elgg:uservalidationbyemail');
