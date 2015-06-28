@@ -2,14 +2,13 @@
 
 // get the form inputs
 $employee_guid = get_input('guid');
-$title = get_input('title');
+$title = get_input('name');
 $address = get_input('street1');
 $pass = get_input('pass');
 $confpass = get_input('confpass');
 $designation = get_input('designation');
 $date_of_join = get_input('date_of_join');
-
-if ($passs == $confpass) {
+if ($pass == $confpass) { 
     if ($employee_guid) {
         $entity = get_entity($employee_guid);
         if (elgg_instanceof($entity, 'object', 'employee') && $entity->canEdit()) {

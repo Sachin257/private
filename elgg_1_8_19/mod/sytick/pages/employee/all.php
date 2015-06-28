@@ -74,7 +74,7 @@ if (count($employee_entities_ids)) {
     $pagination = "";
 }
 
-$body .= elgg_view('employee/list', array("employee" => $employee_entities, "offset" => $offset));
+$body .= elgg_view('employee/list', array("employees" => $employee_entities, "offset" => $offset));
 
 $body .= $pagination;
 

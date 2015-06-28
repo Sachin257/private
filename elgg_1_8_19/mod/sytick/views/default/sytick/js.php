@@ -1914,7 +1914,7 @@ elgg.sytick.init = function() {
 		} else {
 			jQuery(".pass_err").html("");
 		}
-                if( jQuery('#pass').val().length != jQuery('#confpass').val()){
+                if( jQuery('#pass').val() != jQuery('#confpass').val()){
 			jQuery(".confpass_err").html(elgg.echo("password:notmatch:error"));
 			employee_flg = false;
 		} else {

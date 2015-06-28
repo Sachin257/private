@@ -3,7 +3,7 @@
     <div class="span5">
         <label><?php echo elgg_echo("entity:name"); ?></label>
         <?php
-        echo elgg_view('input/text', array('name' => 'name', 'id' => 'name', 'class' => 'MR_one', 'value' => $vars["entity"]->name));
+        echo elgg_view('input/text', array('name' => 'name', 'id' => 'name', 'class' => 'MR_one', 'value' => $vars["entity"]->title));
         ?>
         <span class="error_msg clear name_err"></span>
     </div>
@@ -11,7 +11,7 @@
     <div class="span5">
         <label><?php echo elgg_echo("company:contact_postal_address"); ?></label>
         <?php
-        $contact_postal_address_arr = array('name' => 'street1', 'id' => 'street1', 'value' => $vars["entity"]->street1);
+        $contact_postal_address_arr = array('name' => 'street1', 'id' => 'street1', 'value' => $vars["entity"]->address);
         ?>	            
         <?php echo elgg_view('input/text', $contact_postal_address_arr); ?>
         <span class="error_msg clear  street1_err"></span>

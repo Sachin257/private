@@ -14,10 +14,10 @@ $profile_type_name = elgg_extract('role_name', $vars);
     <table class="elgg-list elgg-list-entity mgr_list">	
 		<tbody>
 		<tr>
-			<th style="width: 23%;"><?php echo elgg_echo('entity:name')?></th>
-			<th style="width: 26%;"><?php echo elgg_echo('email')?></th>
-                        <th style="width: 26%;"><?php echo elgg_echo('entity:company')?></th>
-			<th style="width: 15%;"><?php echo elgg_echo('entity:creation_date')?></th>
+			<th style="width: 20%;"><?php echo elgg_echo('entity:name')?></th>
+			<th style="width: 15%;"><?php echo elgg_echo('entity:joined:date')?></th>
+                        <th style="width: 25%;"><?php echo elgg_echo('entity:designation')?></th>
+			<th style="width: 30%;"><?php echo elgg_echo('company:contact_postal_address')?></th>
 			<th style="width: 10%;"></th>
 		</tr>
 		<?php foreach($employees as $_employee)  {                    
@@ -25,20 +25,13 @@ $profile_type_name = elgg_extract('role_name', $vars);
                     $company_name = $company_name->trading_name;
                     ?>
 		<tr id="elgg-object-<?php echo $_employee->guid?>" class="elgg-item">
-			<td class="company-title">
-			<?php  echo elgg_view('output/url', array(
-					'href' => "/user/$_employee->username",
-					'text' => $_employee->name,
-					'class' => '',
-					'rel' => 'nofollow'
-			)); ?>
-			</td>
-			<td class="company-title"><?php echo $_employee->email?></td>
-                        <td class="company-title"><?php echo $company_name?></td>
-			<td class="company-abn"><?php echo date('d-m-Y',$_employee->time_created)?></td>
+			<td class="company-title"><?php echo $_employee->title;?></td>
+			<td class="company-title"><?php echo $_employee->date_of_join;?></td>
+                        <td class="company-title"><?php echo $_employee->designation;?></td>
+			<td class="company-title"><?php echo $_employee->address;?></td>
 			<td class="company-link">
 				<?php 
-				$edit_url = "/employee/edit/{$_employee->username}";
+				$edit_url = "/employee/edit/$_employee->guid";
 				echo elgg_view('output/url', array(
 						'href' => $edit_url,
 						'text' => elgg_echo('entity:edit'),
