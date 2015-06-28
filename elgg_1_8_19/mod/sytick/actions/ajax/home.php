@@ -42,46 +42,52 @@ switch($process){
 		$paint_guid = get_input('paint_id');
                 $no_of_pieces = get_input('nopieces');
 		$project_guid = get_input("project_guid");
-                $employee = get_input('employee_name');
+                $employee = get_entity(get_input('employee_name'));
+                $pass = get_input('password');
                 $shift = get_input("shift");
                 $project = get_entity($project_guid);
-                if(!isset($project->nopiecesleft)){
-                    $project->nopiecesleft = $project->nopieces;
-                }
-                if($project->nopiecesleft < $no_of_pieces){
-                    $result['status'] = -1;
-                    register_error("Please check your entry and try again");
-                    break;
-                }
-                
-                $entity = get_entity($paint_guid);
-                if (elgg_instanceof($entity, 'object', 'paint')) {
-		$paint = $entity;
-                
-                $title = $project->title;
-                $title = $title.date("Y-m-d");
-                $dailyWork = new ElggObject();
-                $dailyWork->subtype = "dailyWork";
-                $dailyWork->owner_guid = elgg_get_logged_in_user_guid();
-                $dailyWork->title = $title;
-                $dailyWork->nopieces = $no_of_pieces;
-                $dailyWork->access_id = ACCESS_PUBLIC;
-                $dailyWork->paint_quantity_used = $paint_used;
-                $dailyWork->paint_used = $paint_guid;
-                $dailyWork->proj_guid = $project_guid;
-                $dailyWork->employee = $employee;
-                $dailyWork->shift = $shift;
-                $dailyWork->is_deleted = 0;
-                $dailyWork_guid = $dailyWork->save();
-                if($dailyWork_guid)
-                {
-                    add_entity_relationship($project->guid, "project_of_daily_log", $dailyWork_guid);
-                    $project->nopiecesleft = $project->nopiecesleft - $no_of_pieces;
-                }
-                } 
-                else {
-                        register_error(elgg_echo('paint:notfound'));
-                        forward(get_input('forward', REFERER));
+                if($employee->password == $pass){
+                    if(!isset($project->nopiecesleft)){
+                        $project->nopiecesleft = $project->nopieces;
+                    }
+                    if($project->nopiecesleft < $no_of_pieces){
+                        $result['status'] = -1;
+                        register_error("Please check your entry and try again");
+                        break;
+                    }
+
+                    $entity = get_entity($paint_guid);
+                    if (elgg_instanceof($entity, 'object', 'paint')) {
+                    $paint = $entity;
+
+                    $title = $project->title;
+                    $title = $title.date("Y-m-d");
+                    $dailyWork = new ElggObject();
+                    $dailyWork->subtype = "dailyWork";
+                    $dailyWork->owner_guid = elgg_get_logged_in_user_guid();
+                    $dailyWork->title = $title;
+                    $dailyWork->nopieces = $no_of_pieces;
+                    $dailyWork->access_id = ACCESS_PUBLIC;
+                    $dailyWork->paint_quantity_used = $paint_used;
+                    $dailyWork->paint_used = $paint_guid;
+                    $dailyWork->proj_guid = $project_guid;
+                    $dailyWork->employee = $employee->title;
+                    $dailyWork->shift = $shift;
+                    $dailyWork->is_deleted = 0;
+                    $dailyWork_guid = $dailyWork->save();
+                    if($dailyWork_guid)
+                    {
+                        add_entity_relationship($project->guid, "project_of_daily_log", $dailyWork_guid);
+                        $project->nopiecesleft = $project->nopiecesleft - $no_of_pieces;
+                    }
+                    } 
+                    else {
+                            register_error(elgg_echo('paint:notfound'));
+                            forward(get_input('forward', REFERER));
+                    }
+                } else{
+                    register_error("Incorrect password");
+                    forward(get_input('forward', REFERER));
                 }
 		break;
 	case "getaddworkerformfields":

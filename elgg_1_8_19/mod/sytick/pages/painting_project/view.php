@@ -14,7 +14,21 @@ $vars["entity"] = $project;
 $vars["material_type"] = get_entity($project->material_id);
 
 $vars["daily_log"] = get_daily_log_by_project_guid($project->guid);
-//print "<pre>";print_r($vars) ;print "</pre>"; exit;
+
+$search_arr = array(
+    'types' => 'object',
+    'subtypes' => 'employee',
+    'limit' => ELGG_ENTITIES_NO_VALUE
+);
+
+$employees = elgg_get_entities_from_metadata($search_arr);
+$employee_entities = array("" => "Select");
+if (count($employees)) {
+    foreach ($employees as $_employee_entities) {
+        $employee_entities[$_employee_entities->guid] = $_employee_entities->title;
+    }
+}
+$vars["employee_entities"] = $employee_entities;
 
 $search_arr = array(
 		'types' => 'object',
@@ -22,16 +36,7 @@ $search_arr = array(
 		'limit' => ELGG_ENTITIES_NO_VALUE
 );
 
-	$search_arr['metadata_name_value_pairs'][] = array(
-			'name' => "is_deleted",
-			'value' => 0,
-			'operand' => '='
-	);
-
-
-
 $paint_entities = elgg_get_entities_from_metadata($search_arr);
-//print "<pre>";print_r($vars) ;print "</pre>"; exit;
 
 $paint_arr = array(""=> "Select");
 foreach ($paint_entities as $paint_entitie)
@@ -43,7 +48,6 @@ $title = elgg_echo('project:dashboard:title');
 
 $content = elgg_view("painting_project/dashboard", $vars);
 $content .= elgg_view_form("painting_project/daily_log", array('id'=>"ftm_add_workers"), $vars);
-//print "<pre>";print_r($content) ;print "</pre>"; exit;
 // layout the page
 $body = elgg_view_layout('one_column', array('content' => $content));
 

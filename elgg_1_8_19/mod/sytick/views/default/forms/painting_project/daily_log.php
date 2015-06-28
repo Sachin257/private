@@ -6,7 +6,7 @@
                 <h1 class="modal-title" id="myModalLabel"><?php echo elgg_echo('project:dailylog:add'); ?></h1>
             </div>
             <div class="modal-body">
-                <div id="addQuestion" class="userfileup clear span6">		    
+                <div class="userfileup clear span6">		    
                     <div class="nest_wrap">
                         <div class="userrow">
                             <label><?php echo elgg_echo('entity:paint'); ?></label>
@@ -23,7 +23,6 @@
                         <span class="error_msg clear paint_err"></span>
                         <div class="clear"></div>
                         <div class="userrow">
-
                             <label><?php echo elgg_echo("project:nopieces"); ?></label>
                             <?php echo elgg_view('input/text', array('name' => 'nopieces', "id" => "nopieces")); ?>
                             <span class="error_msg clear nopieces_err"></span>      
@@ -37,7 +36,19 @@
                         </div>
                         <div class="userrow">
                             <label><?php echo elgg_echo("paint:user:employee"); ?></label>
-                            <?php echo elgg_view('input/text', array('name' => 'employee_name', "id" => "employee_name")); ?>
+                            <?php
+                            echo elgg_view("input/dropdown", array(
+                                "name" => "employee_name",
+                                "id" => "employee_name",
+                                "class" => "custom-select",
+                                "options_values" => $vars["employee_entities"]
+                            ));
+                            ?>
+                            <span class="error_msg employee_name_err"></span>
+                        </div>
+                        <div class="userrow">
+                            <label><?php echo elgg_echo("entity:password"); ?></label>
+                            <?php echo elgg_view('input/password', array('name' => 'password', "id" => "password")); ?>
                             <span class="error_msg employee_name_err"></span>
                         </div>
                     </div>      
