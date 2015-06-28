@@ -59,29 +59,29 @@ function stad_init() {
     elgg_register_library('elgg:sytick', elgg_get_plugins_path() . 'sytick/lib/sytick.php');
     elgg_load_library('elgg:sytick');
 
-    elgg_register_page_handler('sytick', 'sytick_page_handler');
-    elgg_register_page_handler('user', 'sytick_user_page_handler');
+    elgg_register_page_handler('sytick', 'stad_page_handler');
+    elgg_register_page_handler('user', 'stad_user_page_handler');
 
-    elgg_register_page_handler('search', 'sytick_search_page_handler');
+    elgg_register_page_handler('search', 'stad_search_page_handler');
 
-    elgg_register_page_handler('material_type', 'sytick_material_type_page_handler');
+    elgg_register_page_handler('material_type', 'stad_material_type_page_handler');
 
-    elgg_register_page_handler('company', 'sytick_company_page_handler');
-    elgg_register_page_handler('manager', 'sytick_manager_page_handler');
-    elgg_register_page_handler('project', 'sytick_project_page_handler');
-    elgg_register_page_handler('activity', 'sytick_activity_page_handler');
+    elgg_register_page_handler('company', 'stad_company_page_handler');
+    elgg_register_page_handler('manager', 'stad_manager_page_handler');
+    elgg_register_page_handler('project', 'stad_project_page_handler');
+    elgg_register_page_handler('activity', 'stad_activity_page_handler');
 
-    elgg_register_page_handler('paint', 'sytick_paint_page_handler');
-    elgg_register_page_handler('inventory', 'sytick_inventory_page_handler');
-    elgg_register_page_handler('items', 'sytick_items_page_handler');
-    elgg_register_page_handler('painting_project', 'sytick_painting_project_page_handler');
-    elgg_register_page_handler('employee', 'sytick_employee_page_handler');
-    elgg_register_page_handler('inductionmanager', 'sytick_inductionmanager_page_handler');
-    elgg_register_page_handler('security_person', 'sytick_security_person_page_handler');
-    elgg_register_page_handler('sitemanager', 'sytick_sitemanager_page_handler');
-    elgg_register_page_handler('project_manager', 'sytick_project_manager_page_handler');
-    elgg_register_page_handler('paint_used', 'sytick_paint_used_page_handler');
-    elgg_register_page_handler('material_alerts', 'sytick_material_alerts_page_handler');
+    elgg_register_page_handler('paint', 'stad_paint_page_handler');
+    elgg_register_page_handler('inventory', 'stad_inventory_page_handler');
+    elgg_register_page_handler('items', 'stad_items_page_handler');
+    elgg_register_page_handler('painting_project', 'stad_painting_project_page_handler');
+    elgg_register_page_handler('employee', 'stad_employee_page_handler');
+    elgg_register_page_handler('inductionmanager', 'stad_inductionmanager_page_handler');
+    elgg_register_page_handler('security_person', 'stad_security_person_page_handler');
+    elgg_register_page_handler('sitemanager', 'stad_sitemanager_page_handler');
+    elgg_register_page_handler('project_manager', 'stad_project_manager_page_handler');
+    elgg_register_page_handler('paint_used', 'stad_paint_used_page_handler');
+    elgg_register_page_handler('material_alerts', 'stad_material_alerts_page_handler');
 
     elgg_register_action("user/save", elgg_get_plugins_path() . "sytick/actions/user/save.php");
     elgg_register_action("user/emergency", elgg_get_plugins_path() . "sytick/actions/user/emergency.php");
@@ -112,10 +112,10 @@ function stad_init() {
     $avatar_cropper = 'mod/twitter_bootstrap/vendors/bootstrap/js/ui.avatar_cropper.js';
     elgg_register_js('elgg.avatar_cropper', $avatar_cropper, 'head', 10);
 
-    elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'sytick_public_pages');
+    elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'stad_public_pages');
 }
 
-function sytick_page_handler($segments) {
+function stad_page_handler($segments) {
     if (elgg_is_logged_in()) {
         $lo_user = elgg_get_logged_in_user_entity();
         switch ($segments[0]) {
@@ -150,11 +150,11 @@ function sytick_page_handler($segments) {
     return true;
 }
 
-function sytick_material_alerts_page_handler($segments){
+function stad_material_alerts_page_handler($segments){
     include elgg_get_plugins_path() . 'sytick/pages/material_alerts/all.php';
 }
 
-function sytick_user_page_handler($segments) {
+function stad_user_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     $page_user = null;
     if ($segments[0]) {
@@ -221,11 +221,11 @@ function sytick_user_page_handler($segments) {
     }
 }
 
-function sytick_search_page_handler($segments) {
+function stad_search_page_handler($segments) {
     include elgg_get_plugins_path() . 'sytick/pages/search/results.php';
 }
 
-function sytick_paint_page_handler($segments) {
+function stad_paint_page_handler($segments) {
 //    print '<pre>';print_r(elgg_get_plugins_path());exit;
     switch ($segments[0]) {
         case 'add':
@@ -241,7 +241,7 @@ function sytick_paint_page_handler($segments) {
     }
 }
 
-function sytick_paint_used_page_handler($segments){
+function stad_paint_used_page_handler($segments){
     switch ($segments[0]) {
         case 'add':
             include elgg_get_plugins_path() . 'sytick/pages/paint_used/add.php';
@@ -256,7 +256,7 @@ function sytick_paint_used_page_handler($segments){
     }    
 }
 
-function sytick_items_page_handler($segments) {
+function stad_items_page_handler($segments) {
     switch ($segments[0]) {
         case 'add':
             include elgg_get_plugins_path() . 'sytick/pages/items/add.php';
@@ -264,7 +264,7 @@ function sytick_items_page_handler($segments) {
     }
 }
 
-function sytick_inventory_page_handler($segments) {
+function stad_inventory_page_handler($segments) {
     switch ($segments[0]) {
         case 'add':
             include elgg_get_plugins_path() . 'sytick/pages/inventory/add.php';
@@ -279,7 +279,7 @@ function sytick_inventory_page_handler($segments) {
     }
 }
 
-function sytick_painting_project_page_handler($segments) {
+function stad_painting_project_page_handler($segments) {
     switch ($segments[0]) {
         case 'add':
             include elgg_get_plugins_path() . 'sytick/pages/painting_project/add.php';
@@ -297,7 +297,7 @@ function sytick_painting_project_page_handler($segments) {
     }
 }
 
-function sytick_material_type_page_handler($segments) {
+function stad_material_type_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         case 'add':
@@ -313,12 +313,12 @@ function sytick_material_type_page_handler($segments) {
     }
 }
 
-function sytick_activity_page_handler($segments) {
+function stad_activity_page_handler($segments) {
     $page_user = elgg_get_logged_in_user_entity();
     forward("/user/$page_user->username");
 }
 
-function sytick_company_page_handler($segments) {
+function stad_company_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         case 'add':
@@ -343,7 +343,7 @@ function sytick_company_page_handler($segments) {
     }
 }
 
-function sytick_manager_page_handler($segments) {
+function stad_manager_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         case 'add':
@@ -359,7 +359,7 @@ function sytick_manager_page_handler($segments) {
     }
 }
 
-function sytick_project_page_handler($segments) {
+function stad_project_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         case 'check_in_out':
@@ -385,7 +385,7 @@ function sytick_project_page_handler($segments) {
     }
 }
 
-function sytick_employee_page_handler($segments) {
+function stad_employee_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         default:
@@ -402,7 +402,7 @@ function sytick_employee_page_handler($segments) {
     }
 }
 
-function sytick_inductionmanager_page_handler($segments) {
+function stad_inductionmanager_page_handler($segments) {
     switch ($segments[0]) {
         default:
         case 'all':
@@ -411,7 +411,7 @@ function sytick_inductionmanager_page_handler($segments) {
     }
 }
 
-function sytick_security_person_page_handler($segments) {
+function stad_security_person_page_handler($segments) {
     switch ($segments[0]) {
         default:
         case 'all':
@@ -420,7 +420,7 @@ function sytick_security_person_page_handler($segments) {
     }
 }
 
-function sytick_sitemanager_page_handler($segments) {
+function stad_sitemanager_page_handler($segments) {
     switch ($segments[0]) {
         default:
         case 'all':
@@ -429,7 +429,7 @@ function sytick_sitemanager_page_handler($segments) {
     }
 }
 
-function sytick_contractor_page_handler($segments) {
+function stad_contractor_page_handler($segments) {
     switch ($segments[0]) {
         default:
         case 'all':
@@ -438,7 +438,7 @@ function sytick_contractor_page_handler($segments) {
     }
 }
 
-function sytick_project_manager_page_handler($segments) {
+function stad_project_manager_page_handler($segments) {
     switch ($segments[0]) {
         default:
         case 'all':
@@ -447,7 +447,7 @@ function sytick_project_manager_page_handler($segments) {
     }
 }
 
-function sytick_screen_page_handler($segments) {
+function stad_screen_page_handler($segments) {
     //print '<pre>';print_r($segments);exit;
     switch ($segments[1]) {
         case 'add':
@@ -483,7 +483,7 @@ function sytick_screen_page_handler($segments) {
  * @param unknown_type $return_value
  * @param unknown_type $parameters
  */
-function sytick_public_pages($hook_name, $entity_type, $return_value, $params) {
+function stad_public_pages($hook_name, $entity_type, $return_value, $params) {
     $return = $return_value;
     if (is_array($return)) {
         $return[] = "action/sytick/ajax/home.*";
