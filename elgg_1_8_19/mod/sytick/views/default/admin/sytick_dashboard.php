@@ -45,7 +45,7 @@
             <li><a href="#"><span class="ic_induction circle"></span>Alert<br />Settings</a></li>
             <li><a href="#"><span class="ic_evemanager circle"></span>Calculations</a></li>
             <li><a href="#"><span class="ic_mgmaccount circle"></span>Efficency<br />Settings</a></li>
-            <li><a href="#"><span class="ic_useraccount circle"></span>Employees</a></li>
+            <li><a href="/employee/all"><span class="ic_useraccount circle"></span>Employees</a></li>
             <li><a href="/paint_used"><span class="ic_reports circle"></span>Paint Usage</li>
         </ul>
     </div>

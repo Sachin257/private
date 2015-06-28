@@ -1896,75 +1896,35 @@ elgg.sytick.init = function() {
 	
 	jQuery("#btn_employee_save").live("click", function (event) {	
 		var employee_flg = true; 
-		if( jQuery('#custom_profile_type').val() == ""){
-			jQuery(".custom_profile_type_err").html(elgg.echo("employee:role:error"));
-			employee_flg = false;
-		} else {
-			jQuery(".custom_profile_type_err").html("");
-		}
 		if( jQuery('#name').val() == ""){
 			jQuery(".name_err").html(elgg.echo("employee:name:error"));
 			employee_flg = false;
 		} else {
 			jQuery(".name_err").html("");
 		}
-		if( jQuery('#employee_email').val() == ""){
-			jQuery(".employee_email_err").html(elgg.echo("registration:notemail"));
-			employee_flg = false;
-		} else {
-			jQuery(".employee_email_err").html("");
-		}
-		var email = jQuery('#employee_email').val();
-		if( validate_email(email)){
-			jQuery(".employee_email_err").html("");			
-		} else {
-			jQuery(".employee_email_err").html(elgg.echo("registration:notemail"));
-			employee_flg = false;
-		}
 		if( jQuery('#street1').val() == ""){
-			jQuery(".street1_err").html(elgg.echo("company:street_address:error"));
+			jQuery(".street1_err").html(elgg.echo("street_address:error"));
 			employee_flg = false;
 		} else {
 			jQuery(".street1_err").html("");
 		}
-		if( jQuery('#town').val() == ""){
-			jQuery(".town_err").html(elgg.echo("profile:townerror"));
+                if( jQuery('#pass').val() == "" || jQuery('#pass').val().length < 6){
+			jQuery(".pass_err").html(elgg.echo("password:invalid:error"));
 			employee_flg = false;
 		} else {
-			jQuery(".town_err").html("");
+			jQuery(".pass_err").html("");
 		}
-		if( jQuery('#state').val() == ""){
-			jQuery(".state_err").html(elgg.echo("profile:stateerror"));
+                if( jQuery('#pass').val().length != jQuery('#confpass').val()){
+			jQuery(".confpass_err").html(elgg.echo("password:notmatch:error"));
 			employee_flg = false;
 		} else {
-			jQuery(".state_err").html("");
+			jQuery(".confpass_err").html("");
 		}
-		if( jQuery('#postcode').val() == ""){
-			jQuery(".postcode_err").html(elgg.echo("profile:postcodeerror"));
-			employee_flg = false;
-		} else {
-			jQuery(".postcode_err").html("");
-		}
-		if( jQuery('#company_id').val() == ""){
-			show_messages(elgg.echo("manager:company:error"))
-			employee_flg = false;
-		} 
-		jQuery( ".error_msg" ).each(function( index ) {
-			  //console.log( index + ": " + $( this ).html() );
-			  var str = jQuery( this ).html();
-			  var newStr = str.replace(/\s+/g, '');
-			  if(newStr != "" )
-			  {
-				  employee_flg = false; 
-			  }			  
-		  });
 		if(employee_flg  == false)
 		{
-			//console.log("err");
 			event.preventDefault();
 			return false;
 		} else {
-			//console.log("submit");
 			jQuery(this).closest('form').submit();			 
 		}
 	});

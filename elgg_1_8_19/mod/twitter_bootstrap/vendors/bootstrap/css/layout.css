@@ -517,7 +517,7 @@ table.mgr_list tr td a i{margin-right: 5px;}
 .top_userpannel_mob ul li a.acount{background:url(../img/tp_account_ic.png) no-repeat 10px center;}
 
 /* ---------------------- FORMS ------------------------*/
-.mger_add .span5 input[type="text"], .mger_add .span5 textarea{width: 94.5%;}
+.mger_add .span5 input, .mger_add .span5 textarea{width: 94.5%;}
 .mger_add .span5 textarea{height: 50px; height: 92px; margin-bottom:0;}
 .mger_add .span5 label{font-weight: bold;}
 

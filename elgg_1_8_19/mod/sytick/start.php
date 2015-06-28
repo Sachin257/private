@@ -386,7 +386,6 @@ function stad_project_page_handler($segments) {
 }
 
 function stad_employee_page_handler($segments) {
-    //print '<pre>';print_r($segments);exit;
     switch ($segments[0]) {
         default:
         case 'add':
@@ -396,7 +395,6 @@ function stad_employee_page_handler($segments) {
             include elgg_get_plugins_path() . 'sytick/pages/employee/edit.php';
             break;
         case 'all':
-
             include elgg_get_plugins_path() . 'sytick/pages/employee/all.php';
             break;
     }
