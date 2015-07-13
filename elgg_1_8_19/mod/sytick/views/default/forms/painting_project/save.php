@@ -1,11 +1,19 @@
 <div class="cmp_enity nest_wrap rounded_corners frm_box_shadow frm_box_border span12 MT_one MB_three mger_add">
 
     <div class="span5">
-        <label><?php echo elgg_echo("project:name"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'title', "id" => "paint_project_name", 'value' => $vars["entity"]->title)); ?>
-        <span class="error_msg clear paint_name_err"></span>
+        <label><?php echo elgg_echo("order:from"); ?></label>
+        <?php
+        echo elgg_view("input/dropdown", array(
+            "name" => "order_from",
+            "id" => "order_from",
+            "class" => "custom-select",
+            "options_values" => $vars["order_from_types"],
+            'value' => $vars["entity"]->order_from_types
+        ));
+        ?>
+        <span class="error_msg clear order_from_err"></span>
     </div>
-
+    
     <div class="span5">
         <label><?php echo elgg_echo("material_type:extra:type"); ?></label>
         <?php
@@ -19,8 +27,13 @@
         ?>
         <span class="error_msg clear material_id_err"></span>
     </div>
-    <br/>
-    <div class="clear"></div>
+    
+    <div class="span5">
+        <label><?php echo elgg_echo("project:name"); ?></label>
+        <?php echo elgg_view('input/text', array('name' => 'title', "id" => "paint_project_name", 'value' => $vars["entity"]->title)); ?>
+        <span class="error_msg clear paint_name_err"></span>
+    </div>
+ 
     <div class="span5">
         <label><?php echo elgg_echo("project:nopieces"); ?></label>
         <?php echo elgg_view('input/text', array('name' => 'nopieces', "id" => "nopieces", 'value' => $vars["entity"]->nopieces)); ?>

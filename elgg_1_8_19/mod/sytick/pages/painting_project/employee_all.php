@@ -141,10 +141,10 @@ $vars = array("paint" => $painting_project_entities,
               "final_date" => $final_date,
               'cost' => $total_cost,
               'nopiece' => $total_pieces,
-              "admin" => true,
+              "admin" => false,
               "materials" => $material_id_values);
 
-$body .= elgg_view('painting_project/list', $vars);
+$body .= elgg_view('painting_project/employee_list', $vars);
 $body .= $pagination;
 
 $body = elgg_view_layout('one_column', array('title' => $body_title, 'content' => $body));

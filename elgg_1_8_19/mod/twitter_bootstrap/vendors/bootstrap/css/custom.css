@@ -1,6 +1,9 @@
 body{
     color: black !important;
 }
+.adm_secicons a{
+    color: #0000FF !important;
+}
 .home_slider{
     background-image: url("/mod/twitter_bootstrap/vendors/bootstrap/img/bright_wallpaper.png");
 }

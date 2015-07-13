@@ -1375,18 +1375,37 @@ elgg.sytick.init = function() {
 		return false;	
 	});
 
-        $("#uniq_project").live("change", function(e){
-          console.log($(this).find(":selected").text());
-          if ($(this).val() !== "")
-          {
-              var ser = $(this).find(":selected").text();
-              window.location.href = "/painting_project/all?s="+encodeURIComponent(ser);
-          }
+        
+        $("#btn_paint_prj_filter").on("click", function(){
+            var url = "/painting_project/all?";
+            var ser = "";
+            if ($("#uniq_project").val() !== "")
+            {
+                var ser = ser + "s=" + encodeURIComponent($("#uniq_project").find(":selected").text()) + "&";
+            }
+            if ($("#material_drpdown").val() !== "")
+            {
+                var ser = ser + "m=" + encodeURIComponent($("#material_drpdown").val())+ "&";
+            }
+            if ($("#order_from_drpdown").val() !== "")
+            {
+                var ser = ser + "o=" + encodeURIComponent($("#order_from_drpdown").val()) + "&";
+            }
+            if ($("#start_date").val() !== "")
+            {
+                var ser = ser + "startDate=" + encodeURIComponent($("#start_date").val()) + "&";
+            }
+            if ($("#final_date").val() !== "")
+            {
+                var ser = ser + "finalDate=" + encodeURIComponent($("#final_date").val()) + "&";
+            }
+            window.location.href = url+ser;
         });
-        $("#material_drpdown").live("change", function(e){
-              var ser = $(this).val();
-              window.location.href = "/painting_project/all?m="+encodeURIComponent(ser);
+        
+        $("#btn_paint_prj_filter_reset").on("click", function(){
+            window.location.href = "/painting_project/all";
         });
+        
         $( document ).ready(function() {
             
             if($("#abn").val() == "")
@@ -1716,6 +1735,12 @@ elgg.sytick.init = function() {
 			paint_flg = false;
 		} else {
 			jQuery(".material_id_err").html("");
+		}
+                if( jQuery('#order_from').val() == null || jQuery('#order_from').val() == ""){
+			jQuery(".order_from_err").html(elgg.echo("No option choosed."));
+			paint_flg = false;
+		} else {
+			jQuery(".order_from_err").html("");
 		}
                 if( !$.isNumeric(jQuery('#nopieces').val()) || jQuery('#nopieces').val() <= 0 ){
 			jQuery(".nopieces_err").html(elgg.echo("paint:price:notnumber:error"));

@@ -44,6 +44,7 @@ foreach ($paint_entities as $paint_entitie)
         $paint_arr[$paint_entitie->guid]= $paint_entitie->title . " - " .$paint_entitie->paint_id . " - " . $paint_entitie->colour;
 }
 $vars["paints"] = $paint_arr;
+$vars["employee"] = ($segments[0] == "employee_view") ? FALSE: TRUE;
 $title = elgg_echo('project:dashboard:title');
 
 $content = elgg_view("painting_project/dashboard", $vars);

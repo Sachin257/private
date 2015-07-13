@@ -66,6 +66,34 @@ function check_and_create_paint_alerts($paint_guid){
     }
 }
 
+function get_number_of_painting_projects(){
+     $options = array(
+        'type' => 'object',
+        'subtype' => 'painting_project'
+    );
+     $projects = elgg_get_entities_from_metadata($options);
+     $name_arr = array();
+     foreach ($projects as $project){
+         $name_arr[] = $project->title;
+     }
+     $name_arr = array_unique($name_arr);
+     return count($name_arr);
+}
+
+function get_unique_paint_projects() {
+    $search_arr = array(
+        'types' => 'object',
+        'subtypes' => 'painting_project',
+        'limit' => ELGG_ENTITIES_NO_VALUE
+    );
+    $painting_project_entities = elgg_get_entities_from_metadata($search_arr);
+    $uniq_proj = array("" => "select");
+    foreach ($painting_project_entities as $painting_project_entitie) {
+        $uniq_proj[$painting_project_entitie->guid] = $painting_project_entitie->title;
+    }
+    return array_unique($uniq_proj);
+}
+
 function get_number_of_alerts(){
     $search_arr = array(
         'types' => 'object',

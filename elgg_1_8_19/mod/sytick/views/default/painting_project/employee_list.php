@@ -2,16 +2,11 @@
 $painting_project_entities = elgg_extract('paint', $vars);
 $offset = elgg_extract('offset', $vars);
 $order_from = elgg_extract('order_from', $vars);
-$total_cost = elgg_extract('cost', $vars);
-$total_pieces = elgg_extract('nopiece', $vars);
 ?>
 <div class="clear"></div>
 <div class="cmp_list rounded_corners frm_box_shadow frm_box_border MB_five mgr_listall">
     <div class="search_box nest_wrap "> 
         <div><?php echo elgg_view_form("painting_project/filter", array('id' => 'frm_painting_project_search'), $vars); ?></div>
-    </div>
-    <div class="clear" style="margin: 5px; height: 25px;">
-    <span>Total Cost: <?php echo $total_cost ?> &nbsp;&nbsp;&nbsp; Total number of pieces: <?php echo $total_pieces ?></span>
     </div>
     <div>
         <?php if ($painting_project_entities && count($painting_project_entities)) { ?>
@@ -20,10 +15,9 @@ $total_pieces = elgg_extract('nopiece', $vars);
                     <tr>
                         <th style="width:10%;">Date</th>
                         <th style="width:25%;"><?php echo elgg_echo('entity:name') ?></th>
-                        <th style="width:15%;"><?php echo elgg_echo('order:from') ?></th>
-                        <th style="width:20%;"><?php echo elgg_echo('material_type:extra:type') ?></th>
+                        <th style="width:20%;"><?php echo elgg_echo('order:from') ?></th>
+                        <th style="width:25%;"><?php echo elgg_echo('material_type:extra:type') ?></th>
                         <th style="width:10%;"><?php echo elgg_echo('project:nopieces') ?></th>
-                        <th style="width:10%;"><?php echo "Total Cost"; ?></th>
                         <th style="width:10%;"></th>
                     </tr>
                     <?php foreach ($painting_project_entities as $paint_entitie) { ?>
@@ -32,7 +26,7 @@ $total_pieces = elgg_extract('nopiece', $vars);
                             <td class="company-title">
                                 <?php
                                 echo elgg_view('output/url', array(
-                                    'href' => "/painting_project/view/$paint_entitie->guid",
+                                    'href' => "/painting_project/employee_view/$paint_entitie->guid",
                                     'text' => $paint_entitie->title,
                                     'class' => '',
                                     'rel' => 'nofollow'
@@ -50,12 +44,6 @@ $total_pieces = elgg_extract('nopiece', $vars);
                                 ?>
                             </td>
                             <td><?php echo $paint_entitie->nopieces; ?></td>
-                            <td>
-                                <?php
-                                $cost = $paint_entitie->nopieces * $material->price * $material->perimeter * $paint_entitie->lengthperpiece;
-
-                                echo $cost;
-                                ?></td>
                             <td class="company-link">
                                 <?php
                                 $edit_url = "/painting_project/add?name=$paint_entitie->title";

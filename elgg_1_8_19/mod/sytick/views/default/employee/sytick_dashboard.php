@@ -9,6 +9,7 @@
             <li><a href="/painting_project/all"><span class="ic_induction circle"></span>Painting<br />Projects</a></li>
             <li><span class="ic_evemanager circle"></span>Daily<br />Work</li>
             <li><a href="#"><span class="ic_mgmaccount circle"></span>Work<br />Efficency</a></li>
+            <li><a href="/painting_project/employee_all"><span class="ic_useraccount circle"></span>Employee</a></li>
         </ul>
     </div>
     <h2>Inventory</h2>

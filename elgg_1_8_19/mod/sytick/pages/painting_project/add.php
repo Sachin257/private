@@ -2,6 +2,8 @@
 // make sure only logged in users can see this page
 gatekeeper();
 
+global $order_from_types;
+
 $name = $_GET["name"];
 
 // set the title
@@ -11,6 +13,7 @@ $title = elgg_echo('painting_project:add');
 // start building the main column of the page
 $content = elgg_view_title($title);
 $vars["material_id_values"] = get_material_type_id_values();
+$vars["order_from_types"] = $order_from_types;
 if($name !== "")
 {
 $vars["entity"]->title = $name;

@@ -13,6 +13,17 @@ $inventory_types[0] = "Select";
 $inventory_types[1] = "aluminium";
 $inventory_types[2] = "glass";
 
+/**
+ *
+ * global variable array for inventory types
+ */
+global $order_from_types;
+$order_from_types[""] = "Select";
+$order_from_types[0] = "Bright Ernakulam";
+$order_from_types[1] = "Bright Bypass";
+$order_from_types[2] = "Bright Kayamkulam";
+$order_from_types[3] = "Eternia";
+$order_from_types[4] = "Direct";
 
 /**
  *
@@ -56,7 +67,7 @@ function stad_init() {
 
     elgg_register_library('elgg:uservalidationbyemail', elgg_get_plugins_path() . 'uservalidationbyemail/lib/functions.php');
     elgg_load_library('elgg:uservalidationbyemail');
-    elgg_register_library('elgg:sytick', elgg_get_plugins_path() . 'sytick/lib/sytick.php');
+    elgg_register_library('elgg:sytick', elgg_get_plugins_path() . 'sytick/lib/stad.php');
     elgg_load_library('elgg:sytick');
 
     elgg_register_page_handler('sytick', 'stad_page_handler');
@@ -272,10 +283,16 @@ function stad_painting_project_page_handler($segments) {
         default :
             include elgg_get_plugins_path() . 'sytick/pages/painting_project/all.php';
             break;
+        case 'employee_all':
+            include elgg_get_plugins_path() . 'sytick/pages/painting_project/employee_all.php';
+            break;
         case 'edit':
             include elgg_get_plugins_path() . 'sytick/pages/painting_project/edit.php';
             break;
         case 'view':
+            include elgg_get_plugins_path() . 'sytick/pages/painting_project/view.php';
+            break;
+        case 'employee_view':
             include elgg_get_plugins_path() . 'sytick/pages/painting_project/view.php';
             break;
     }

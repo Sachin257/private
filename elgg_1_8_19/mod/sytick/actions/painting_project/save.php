@@ -4,6 +4,7 @@
 $paint_guid = get_input('guid');
 $title = get_input('title');
 $material_id = get_input('material_id');
+$order_from_id = get_input('order_from');
 $nopieces = get_input('nopieces');
 $lengthperpiece = get_input('lengthperpiece');
 $flag = "";
@@ -30,6 +31,7 @@ $paint->nopieces = $nopieces;
 $paint->nopiecesleft = $nopieces;
 $paint->lengthperpiece = $lengthperpiece;
 $paint->material_id = $material_id;
+$paint->order_from = $order_from_id;
 
 $paint->is_deleted = 0;
 $paint->access_id = ACCESS_PUBLIC;
