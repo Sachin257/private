@@ -450,7 +450,13 @@ table.elgg-list{margin: 0;}
 .mgr_listall{padding: 15px; position: relative; zoom: 1; /*margin-top: 15px;*/}
 .search_box{margin-bottom: 15px;}
 .search_box h3{line-height: 40px;}
-table.mgr_list tr td{border-bottom: 1px solid #ddd;}
+table.mgr_list tr td{
+    border-bottom: 1px solid #ddd;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 table.mgr_list tr td a.edit-question{margin-right: 10px;}
 table.mgr_list tr td a i{margin-right: 5px;}
 .companytitle{color: #333 !important;}
