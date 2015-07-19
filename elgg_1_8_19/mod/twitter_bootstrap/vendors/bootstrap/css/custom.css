@@ -462,19 +462,20 @@ ul.elgg-input-checkboxes li label{font-weight: normal !important;}
 ul.elgg-input-checkboxes li input[type="checkbox"]{margin-right: 10px;}
 ul.elgg-input-checkboxes{margin-left: 0;}
 .span12 h2{padding-left: .7%;}
-/*---------------------- test -------------------------*/
 
-.select-wrapper{
+.small-input{
+    width: 50% !important;
+    margin-right: 10px;
+    float: left;
+}
+.select-wrapper, .select-unit-wrapper{
     float: left;
     display: inline-block;
     border: 1px solid #d8d8d8;            
     background:url(../img/dp_down.png) no-repeat 98% center;
     cursor: pointer;
 }
-.select-wrapper, .select-wrapper select{
-    width: 463px;
-    height: 34px;
-    line-height: 26px;
+.select-wrapper,.select-unit-wrapper, .select-wrapper select, .select-unit-wrapper select{
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -484,8 +485,27 @@ ul.elgg-input-checkboxes{margin-left: 0;}
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
+.select-wrapper, .select-wrapper select{
+   width: 463px;
+    height: 34px;
+    line-height: 26px; 
+}
+.modal .select-wrapper, .modal .select-wrapper select{
+    width: 308px;
+    height: 30px;
+    line-height: 26px; 
+}
+.modal{
+    background-color: rgb(255, 255, 255);
+}
+.select-unit-wrapper, .select-unit-wrapper select{
+   width: 200px;
+    height: 30px;
+    line-height: 26px; 
+}
 .select-wrapper:hover{background: url("../img/dp_dhover.png") no-repeat 98% center;}
-.select-wrapper .holder{
+.select-unit-wrapper:hover{background: url("../img/dp_dhover.png") no-repeat 98% center;}
+.select-wrapper .holder,.select-unit-wrapper .holder{
     display: block;
     margin: 0 35px 0 5px;
     white-space: nowrap;            
@@ -496,7 +516,7 @@ ul.elgg-input-checkboxes{margin-left: 0;}
     color: black;
 }
 	
-.select-wrapper select{
+.select-wrapper select,.select-unit-wrapper select{
     margin: 0;
     position: absolute;
     z-index: 2;            

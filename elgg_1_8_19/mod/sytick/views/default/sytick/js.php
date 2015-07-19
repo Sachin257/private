@@ -57,7 +57,6 @@ elgg.sytick.init = function() {
 		event.preventDefault();
 	});
         
-        
         jQuery("#paintingProjectAdd").live("click", function(e){
             $("#projectNameModal").modal();
         
@@ -65,13 +64,22 @@ elgg.sytick.init = function() {
         
         jQuery("#btn_project_name").live("click", function(e){
             var name = jQuery("#projName").val();
-            console.log(name);
-            if(name !== "")
-            {
-            window.location.href = "/painting_project/add?name="+name;
-            }
-            else{
+            var from = jQuery("#order_from").val();
+            var flag = true;
+            if(name == ""){
                 $(".projName_err").html("Enter a name for project.");
+                flag = false;
+            }else{
+                $(".projName_err").html("");
+            }
+            if(from == ""){
+                $(".orderFrom_err").html("Select a value.");
+                flag = false;
+            }else{
+                $(".orderFrom_err").html("");
+            }
+            if(flag){
+                window.location.href = "/painting_project/add?name="+name+"&from="+from;
             }
         });
  
@@ -1401,7 +1409,25 @@ elgg.sytick.init = function() {
             }
             window.location.href = url+ser;
         });
-        
+
+	$("#btn_tentative_filter").on("click", function(){
+		var url = "/tentative_work/all?";
+		var ser = "";
+		if ($("#start_date").val() !== "")
+		{
+			var ser = ser + "startDate=" + encodeURIComponent($("#start_date").val()) + "&";
+		}
+		if ($("#final_date").val() !== "")
+		{
+			var ser = ser + "finalDate=" + encodeURIComponent($("#final_date").val());
+		}
+		window.location.href = url+ser;
+	});
+
+	$("#btn_tentative_filter_reset").on("click", function(){
+		window.location.href = "/tentative_work/all";
+	});
+
         $("#btn_paint_prj_filter_reset").on("click", function(){
             window.location.href = "/painting_project/all";
         });
@@ -1427,87 +1453,34 @@ elgg.sytick.init = function() {
         }).trigger('change');
                 
     $( document ).ready(function() {
-       $(".custom-select").each(function(){
-       var selectedOption = $(this).find(":selected").text();
-           $(this).wrap("<span class='select-wrapper'></span>");
-           $(this).after("<span class='holder'></span>");
-           $(this).next(".holder").html(selectedOption);
+        $(".custom-select").each(function(){
+            var selectedOption = $(this).find(":selected").text();
+            $(this).wrap("<span class='select-wrapper'></span>");
+            $(this).after("<span class='holder'></span>");
+            $(this).next(".holder").html(selectedOption);
         });
-    });
+       
+        $(".custom-unit-select").each(function(){
+            var selectedOption = $(this).find(":selected").text();
+            $(this).wrap("<span class='select-unit-wrapper'></span>");
+            $(this).after("<span class='holder'></span>");
+            $(this).next(".holder").html(selectedOption);
+        });
+    });        
            
-           
-          $(".custom-select").change(function(){
+    $(".custom-select").change(function(){
             var selectedOption = $(this).find(":selected").text();
             console.log("change",selectedOption);
             $(this).next(".holder").html(selectedOption);
-            if ($(this).attr('id')  == "prj_company_id") {
-            if(jQuery(this).val() != "" && elgg.is_admin_logged_in())
-		  {
-			   	var postData = jQuery(this).attr('id')+"="+jQuery(this).val();
-			   	var __elgg_ts =	elgg.security.token.__elgg_ts;
-			 	var __elgg_token =	elgg.security.token.__elgg_token;
-                                jQuery('#manager_id, #ind_manager_id, #security_person_id').next(".holder").text('');
-			    jQuery.ajax( {
-			    	type: "POST",
-			    	url : '/action/sytick/ajax/home',
-			    	data : postData+"&process=getmanagers&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
-			    })
-			    .done(function(data) {
-			        //console.log( "success"+data );
-			        if(data)
-		        	{
-			        	var obj_data = jQuery.parseJSON( data );
-			        	var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
-			        	jQuery('#manager_id').empty();
-                                        //jQuery('#whs_manager_id').empty();
-                                        jQuery('#ind_manager_id').empty();
-                                        jQuery('#security_person_id').empty();
-			        	if(call_status != -1 )
-		        		{
-		        			//console.log( obj_data.output )
-		        			var mgr_arr =obj_data.output.manager_id;
-                                                var ind_mgr_arr =obj_data.output.ind_manager_id;
-                                                var security_person_arr = obj_data.output.security_person_id;
-                                                 jQuery('#manager_id').append( $('<option></option>').val("").html("") );
-                                                 jQuery('#ind_manager_id').append( $('<option></option>').val("").html("") );
-                                                 jQuery('#security_person_id').append( $('<option></option>').val("").html("") );
-		        			if(mgr_arr.length){
-			        			$.each(mgr_arr, function(i, item) {
-								    jQuery('#manager_id').append( $('<option></option>').val(item.guid).html(item.name) )
-								});
-			        			//$.each(mgr_arr, function(i, item) {
-							//	    jQuery('#whs_manager_id').append( $('<option></option>').val(item.guid).html(item.name) )
-							//	});                                                               
-                                                        $.each(ind_mgr_arr, function(i, item) {
-								    jQuery('#ind_manager_id').append( $('<option></option>').val(item.guid).html(item.name) )
-								});
-                                                        $.each(security_person_arr, function(i, item) {
-								    jQuery('#security_person_id').append( $('<option></option>').val(item.guid).html(item.name) )
-								});
-                                                                }
-			        		 jQuery(".prj_company_id_err").html("");
-		        		} else {
-		        			//alert(obj_data.system_messages.error);
-		        			jQuery(".prj_company_id_err").html(obj_data.system_messages.error[0]);	        			
-		        		}		        	
-		        	}
-			    })
-			    .fail(function() {
-			      //alert( "error" );
-			    })
-			    .always(function() {
-			      //alert( "complete" );			    	
-			    });
-		  }
-            }
-        })
-       
-                 
-  //  document.getElementById("uploadBtn").onchange = function () {
-   // document.getElementById("uploadFile").value = this.value;
-//};
+    });
     
-     jQuery("#btn_material_type_save").live("click", function (event) {	
+    $(".custom-unit-select").change(function(){
+        var selectedOption = $(this).find(":selected").text();
+        console.log("change",selectedOption);
+        $(this).next(".holder").html(selectedOption);
+    });
+    
+    jQuery("#btn_material_type_save").live("click", function (event) {	
 		var material_type_flg = true;          
                 if(jQuery('#material_title').val() != "")
 		  {
@@ -1721,8 +1694,55 @@ elgg.sytick.init = function() {
                     return false;
 		} 
 	});
-              
-          jQuery("#btn_paint_project_save").live("click", function (event) {	
+
+	jQuery("#btn_project_assign_save").on("click", function (event) {
+
+		var paint_flag = true;
+		if( jQuery('#a_start_date').val() == null || jQuery('#a_start_date').val() == ""){
+			jQuery(".prj_start_date_err").html("This is required");
+			paint_flag = false;
+		} else {
+			jQuery(".prj_start_date_err").html("");
+		}
+		if( jQuery('#date').val() == null || jQuery('#date').val() == ""){
+			jQuery(".paint_date_err").html("Select a date.");
+			paint_flag = false;
+		} else {
+			jQuery(".paint_date_err").html("");
+		}
+		if( !$.isNumeric(jQuery('#nopieces').val()) || jQuery('#nopieces').val() <= 0 ){
+			jQuery(".nopieces_err").html(elgg.echo("paint:price:notnumber:error"));
+			paint_flag = false;
+		} else {
+			jQuery(".nopieces_err").html("");
+		}
+		if(!paint_flag){
+			event.preventDefault();
+			return false;
+		}
+	});
+
+	jQuery("#btn_project_tentative_save").on("click", function (event) {
+		var paint_flag = true;
+		if( jQuery('#date').val() == null || jQuery('#date').val() == ""){
+			jQuery(".paint_date_err").html("Select a date.");
+			paint_flag = false;
+		} else {
+			jQuery(".paint_date_err").html("");
+		}
+		if( jQuery('#paint_color').val() == null || jQuery('#paint_color').val() == ""){
+			jQuery(".paint_color_err").html(elgg.echo("paint:color:error"));
+			paint_flag = false;
+		} else {
+			jQuery(".paint_color_err").html("");
+		}
+		if(!paint_flag){
+			event.preventDefault();
+			return false;
+		}
+	});
+
+	jQuery("#btn_paint_project_save").live("click", function (event) {
 		var paint_flg = true;
 		if( jQuery('#paint_project_name').val() == null || jQuery('#paint_project_name').val() == ""){
 			jQuery(".paint_name_err").html(elgg.echo("paint:name:error"));
@@ -1742,7 +1762,7 @@ elgg.sytick.init = function() {
 		} else {
 			jQuery(".order_from_err").html("");
 		}
-                if( !$.isNumeric(jQuery('#nopieces').val()) || jQuery('#nopieces').val() <= 0 ){
+        if( !$.isNumeric(jQuery('#nopieces').val()) || jQuery('#nopieces').val() <= 0 ){
 			jQuery(".nopieces_err").html(elgg.echo("paint:price:notnumber:error"));
 			paint_flg = false;
 		} else {
@@ -1758,7 +1778,7 @@ elgg.sytick.init = function() {
 		{
 			event.preventDefault();
 			return false;
-		} 
+		}
 	});
 	
 	  jQuery("#btn_project_save").live("click", function (event) {	
@@ -2282,6 +2302,113 @@ elgg.sytick.init = function() {
                     }
         
          });
+
+        jQuery("#a_order_from").live("change", function (event) {
+	    if(jQuery(this).val() != "" && jQuery(this).val() != "")
+            {
+                $("#a_paint_project_name").next(".holder").html("");
+                $("#a_paint_project_name").empty();
+                $("#a_material_id").next(".holder").html("");
+                $("#a_material_id").empty();
+                $("#a_start_date").next(".holder").html("");
+                $("#a_start_date").empty();
+                var postData = "order_from="+jQuery(this).val();
+                var __elgg_ts =	elgg.security.token.__elgg_ts;
+		var __elgg_token =	elgg.security.token.__elgg_token;
+                jQuery.ajax( {
+			type: "POST",
+			url : '/action/sytick/ajax/home',
+			data : postData+"&process=getProjectsFromOrder&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data)
+		        	{ 
+			        	var obj_data = jQuery.parseJSON( data );
+			        	var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+			        	if(call_status != -1 )
+		        		{	        
+                                            var roles_arr =obj_data.output.projects;
+                                            roles_arr = $.map(roles_arr, function(value,index){
+                                                return [value];
+                                            });
+                                            if(roles_arr.length){
+                                                jQuery('#a_paint_project_name').append( $('<option></option>').val("").html("Select") )
+			        		$.each(roles_arr, function(i, item) {
+                                                    jQuery('#a_paint_project_name').append( $('<option></option>').val(item).html(item) );
+                                                });
+                                            }
+		        		} else {
+                                            alert(obj_data.system_messages.error);
+		        		}		        	
+		        	}
+                        });    
+            }
+        });
+        
+        jQuery("#a_paint_project_name").live("change", function (event) {
+	    if(jQuery(this).val() != "" && jQuery(this).val() != "")
+            {
+                $("#a_material_id").next(".holder").html("");
+                $("#a_material_id").empty();
+                $("#a_start_date").next(".holder").html("");
+                $("#a_start_date").empty();
+                var postData = "order_from="+jQuery("#a_order_from").val() + "&project_name=" + jQuery(this).val();
+                var __elgg_ts =	elgg.security.token.__elgg_ts;
+		var __elgg_token =	elgg.security.token.__elgg_token;
+                jQuery.ajax( {
+			type: "POST",
+			url : '/action/sytick/ajax/home',
+			data : postData+"&process=getProjectsFromName&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data)
+		        	{ 
+			        	var obj_data = jQuery.parseJSON( data );
+			        	var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+			        	if(call_status != -1 )
+		        		{	        
+                                            var roles_arr =obj_data.output.materials;
+                                                jQuery('#a_material_id').append( $('<option></option>').val("").html("Select") )
+                                                for (var key in roles_arr){
+                                                    jQuery('#a_material_id').append( $('<option></option>').val(key).html(roles_arr[key]) );
+                                                    }
+		        		} else {
+                                            alert(obj_data.system_messages.error);
+		        		}		        	
+		        	}
+                        });    
+            }
+        });
+        
+        jQuery("#a_material_id").live("change", function (event) {
+	    if(jQuery(this).val() != "" && jQuery(this).val() != "")
+            {
+                $("#a_start_date").next(".holder").html("");
+                $("#a_start_date").empty();
+                var postData = "order_from="+jQuery("#a_order_from").val() + "&project_name="+ jQuery("#a_paint_project_name").val() + "&material_id" + jQuery(this).val();
+                var __elgg_ts =	elgg.security.token.__elgg_ts;
+		var __elgg_token =	elgg.security.token.__elgg_token;
+                jQuery.ajax( {
+			type: "POST",
+			url : '/action/sytick/ajax/home',
+			data : postData+"&process=getProjectDates&__elgg_ts="+__elgg_ts+"&__elgg_token="+__elgg_token,		
+			}).done(function(data) {
+			        if(data)
+		        	{ 
+			        	var obj_data = jQuery.parseJSON( data );
+			        	var call_status = (obj_data.status) ?  ((obj_data.status)*1) : 0;
+			        	if(call_status != -1 )
+		        		{	        
+                                            var roles_arr =obj_data.output.dates;
+                                                jQuery('#a_start_date').append( $('<option></option>').val("").html("Select") )
+                                                for (var key in roles_arr){
+                                                    jQuery('#a_start_date').append( $('<option></option>').val(key).html(roles_arr[key]) );
+                                                    }
+		        		} else {
+                                            alert(obj_data.system_messages.error);
+		        		}		        	
+		        	}
+                        });    
+            }
+        });
          
         jQuery("#paint_id_name").on("change", function (event) {
 	         if(jQuery(this).val() != "")

@@ -42,7 +42,16 @@
 
     <div class="span5">
         <label><?php echo elgg_echo("project:lengthperpiece"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'lengthperpiece', "id" => "lengthperpiece", 'value' => $vars["entity"]->lengthperpiece)); ?>
+        <?php echo elgg_view('input/text', array('name' => 'lengthperpiece', "id" => "lengthperpiece", "class" => "small-input", 'value' => $vars["entity"]->lengthperpiece)); ?> 
+        &nbsp;&nbsp;&nbsp;
+        <?php
+        echo elgg_view("input/dropdown", array(
+            "name" => "unit",
+            "id" => "unit",
+            "class" => "custom-unit-select",
+            "options_values" => $vars["units"]
+        ));
+        ?>
         <span class="error_msg clear lengthperpiece_err"></span>
     </div>
 

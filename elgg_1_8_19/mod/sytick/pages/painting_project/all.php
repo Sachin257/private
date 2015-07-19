@@ -84,11 +84,6 @@ if (count($painting_project_entities_ids)) {
             'offset' => $offset,
             'count' => TRUE,
         );
-        $options['metadata_name_value_pairs'][] = array(
-            'name' => "is_deleted",
-            'value' => 0,
-            'operand' => '='
-        );
 
         $count = elgg_get_entities_from_metadata($options);
 
@@ -98,12 +93,6 @@ if (count($painting_project_entities_ids)) {
             'guid' => $painting_project_entities_ids,
             'limit' => $limit,
             'offset' => $offset,
-        );
-
-        $options['metadata_name_value_pairs'][] = array(
-            'name' => "is_deleted",
-            'value' => 0,
-            'operand' => '='
         );
         $painting_project_entities = elgg_get_entities_from_metadata($options);
 

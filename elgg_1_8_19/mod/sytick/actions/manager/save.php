@@ -51,7 +51,7 @@ if($guid)
 		if (elgg_instanceof($company, 'object', 'company')) {
 			$profile_type_arr = get_custom_profile_types(MANAGER_PROFILE_TYPE);
 			$manager_profile_type_guid = ($profile_type_arr && isset($profile_type_arr['guid']) ) ? $profile_type_arr['guid'] :0;
-			$guid = create_manager($manager_arr, $manager_profile_type_guid, $company);
+			$guid = 1;
 			system_message(elgg_echo("manager:message:saved"));
 			forward("/manager/all");
 		} else {

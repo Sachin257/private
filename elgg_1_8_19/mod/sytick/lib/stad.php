@@ -182,7 +182,6 @@ function checkin_employee_to_site($site_guid, $user_guid) {
             $employee_check_in_out->description = $site_name . "by" . $checkin_user->name . " at " . date('D-m-y h:i:s', $current_date_timestamp);
             // owner is logged in user
             $employee_check_in_out->owner_guid = elgg_get_logged_in_user_guid();
-            $employee_check_in_out->is_deleted = 0;
             $employee_check_in_out->access_id = ACCESS_PUBLIC;
 
             $employee_check_in_out->user_guid = $user_guid;
@@ -407,14 +406,6 @@ function get_sites_of_projects($project_id, $page_limit = 5) {
         'operand' => '='
     );
 
-    //if(! elgg_is_admin_logged_in())
-    //{
-    $select_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
-    //}
     $sites = elgg_get_entities_from_metadata($select_arr);
     //print '<pre>';print_r($sites);exit;
     return $sites;
@@ -436,15 +427,6 @@ function get_sites_by_name($name) {
         'value' => $name,
     );
 
-    //if(! elgg_is_admin_logged_in())
-    //{
-    $select_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
-    //}
-    /* print '<pre>';print_r($select_arr); */
     $sites = elgg_get_entities_from_metadata($select_arr);
     //print '<pre>';print_r($projects);exit;
     return ($sites && count($sites)) ? $sites[0] : false;
@@ -489,16 +471,7 @@ function get_sites($page_limit = 5) {
         $select_arr['limit'] = $page_limit;
     }
 
-    //if(! elgg_is_admin_logged_in())
-    //{
-    $select_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
-    //}
     $sites = elgg_get_entities_from_metadata($select_arr);
-    //print '<pre>';print_r($sites);exit;
     return $sites;
 }
 
@@ -879,6 +852,30 @@ function get_project_search($search, $guid_str = "") {
     }
 }
 
+function get_painting_projects_from_metadata($params){
+    $search_arr = array(
+    'types' => 'object',
+    'subtypes' => 'painting_project',
+    'limit' => ELGG_ENTITIES_NO_VALUE
+    );
+    if ($params["order_from"] != "") {
+        $search_arr['metadata_name_value_pairs'][] = array(
+            'name' => "order_from",
+            'value' => $params["order_from"],
+            'operand' => '='
+        );
+    }
+    if (isset($params["material_id"]) && $params["material_id"] != "") {
+        $search_arr['metadata_name_value_pairs'][] = array(
+        'name' => "material_id",
+        'value' => $params["material_id"],
+        'operand' => '='
+        );
+    }
+    $painting_project_entities = elgg_get_entities_from_metadata($search_arr);
+    return $painting_project_entities;
+}
+
 function get_material_type_search($search, $guid_str = "") {
     global $CONFIG;
 
@@ -1145,8 +1142,24 @@ function get_daily_log_by_project_guid($project_guid) {
         "relationship_guid" => $project_guid,
         "limit" => ELGG_ENTITIES_NO_VALUE
     );
-
     return elgg_get_entities_from_relationship($options);
+}
+
+function calculate_efficiency($project_guid, $assign_guid){
+    $assign = get_entity($assign_guid);
+    $daily_logs = get_daily_log_by_project_guid($project_guid);
+    $finished = 0;
+    foreach($daily_logs as $daily_log){
+        if($daily_log->shift == $assign->shift){
+            $date = date("Y-m-d", $daily_log->time_created);
+            if($date == $assign->date){
+                $finished = $daily_log->nopieces;
+                break;
+            }
+        }
+    }
+    $efficiency = $finished/$assign->nopieces*100;
+    return array("finished" => $finished, "efficiency" => $efficiency);
 }
 
 function check_unique_project_name($project_name, $guid) {
@@ -1313,16 +1326,7 @@ function get_companies($params = array()) {
             'value' => $params['name']
         );
     }
-    //if(! elgg_is_admin_logged_in()) {
-    $select_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
-    //} 
-    //print '<pre>';print_r($select_arr);print '</pre>';//exit;
     $entitys = elgg_get_entities_from_metadata($select_arr);
-    //print '<pre>';print_r($entitys);print '</pre>';exit;
     return $entitys;
 }
 
@@ -1416,109 +1420,6 @@ function is_unique_company_primary_contact($contact_id) {
     return true;
 }
 
-function create_manager($manager_arr, $manager_profile_type_guid, $company, $manager_id = 0) {
-    $company_id = $company->guid;
-    extract($manager_arr);
-    $username = substr($email, 0, strpos($email, '@'));
-    //$username = strtolower($username);
-    //$username = preg_replace("/[^0-9a-zA-Z]/", "", $username);
-    if (strlen($username) < 5) {
-        $to_add = 5 - strlen($username);
-        /* for($i = 1 ; $i< $to_add; $i++)
-          {
-          $username = $username."0";
-          }
-          $username = $username."1"; */
-        $username = str_pad($username, $to_add, "0", STR_PAD_RIGHT);
-    }
-    $username = get_unique_username($username, $guid);
-    $password = substr(md5(rand()), 0, 6);
-    $friend_guid = "";
-    $invitecode = "";
-    $guid = register_user($username, $password, $name, $email, false, $friend_guid, $invitecode);
-    if ($guid) {
-        $new_user = get_entity($guid);
-        $new_user->custom_profile_type = $manager_profile_type_guid;
-        $new_user->street1 = $street1;
-        $new_user->town = $town;
-        $new_user->state = $state;
-        $new_user->postcode = $postcode;
-        $new_user->country = $country;
-        $new_user->enabled = "no";
-        $new_user->save();
-    }
-    //print '<pre>';print_r($new_user);print '</pre>';
-    if ($company_id && $guid) {
-        add_entity_relationship($company_id, "manager_of_company", $guid);
-        //$company->contact_id = $guid;
-        //$company->save();
-        send_company_creation_email_to_contact($company, $new_user);
-    }
-    return $guid;
-}
-
-/**
- * create a company manager
- * @method create_company_manager 
- * @param {object} $company
- * @param {array} $manage_arr
- * @return {boolean}
- */
-function create_company_manager_as_primary_contact($company, $manager_arr) {
-    $company_id = $company->guid;
-    $contact_id = ($company->contact_id) ? $company->contact_id : 0;
-    $profile_type_arr = get_custom_profile_types(MANAGER_PROFILE_TYPE);
-    $manager_profile_type_guid = ($profile_type_arr && isset($profile_type_arr['guid']) ) ? $profile_type_arr['guid'] : 0;
-    extract($manager_arr);
-    if ($contact_id == 0) {
-        //  create a new manager - primary contact	
-        $guid = create_manager($manager_arr, $manager_profile_type_guid, $company);
-        $company->contact_id = $guid;
-        $company->save();
-    } else {
-        $manager = get_entity($contact_id);
-        $manager_email = $manager->email;
-        //echo $manager_email ." ".$email;die("here");
-        if ($manager_email != $email) {
-            // change manager - primary contact
-            $change_user = get_user_by_email_noaccess($email);
-            $change_user = ($change_user) && isset($change_user[0]) ? $change_user[0] : false;
-            //print '<pre>';print_r($change_user);exit;
-            //echo $contact_id ." ".$change_user->guid;die("here");
-            if ($change_user &&
-                    $change_user->custom_profile_type == $manager_profile_type_guid && (is_unique_company_primary_contact($change_user->guid))) {
-                // changed user details already a manager with no primary contact company
-                $guid = $change_user->guid;
-                if ($company_id && $guid) {
-                    add_entity_relationship($company_id, "manager_of_company", $guid);
-                    $company->contact_id = $guid;
-                    $company->save();
-                }
-            } elseif (!$change_user) {
-                // new user as primary contact manager of company
-                //print '<pre>';print_r($company);exit;
-                //echo $contact_id ." ".$change_user->guid;die("here");
-                $guid = create_manager($manager_arr, $manager_profile_type_guid, $company, $manager->guid);
-                $company->contact_id = $guid;
-                $company->save();
-            } else {
-                return false;
-            }
-        } else {
-            // update existing primary contact details
-            $manager->name = $name;
-            $manager->street1 = $street1;
-            $manager->town = $town;
-            $manager->state = $state;
-            $manager->postcode = $postcode;
-            $manager->country = $country;
-            $manager->save();
-            set_user_display_name($name, $manager->guid);
-        }
-    }
-    return true;
-}
-
 /**
  * send company creation mail
  * @param {object} $company
@@ -1537,8 +1438,6 @@ function send_company_creation_email_to_contact($company, $user) {
     }
     $link = "{$site->url}sytick/activatemanager?k=" . base64_encode($user->guid) . "&c=$code";
     $subject = elgg_echo('company:create:subject', array($company->title, $site->name));
-    //$body = elgg_echo('company:create:body', array($user->name,$company->trading_name, $link, $site->name, $site->url));
-    //$html_body = insert_html_mail_template($body);
     $vars = array("username" => $user->name,
         "sitename" => $site->name,
         "companyname" => $company->trading_name,
@@ -1547,7 +1446,6 @@ function send_company_creation_email_to_contact($company, $user) {
         "siteurl" => $site->url);
     $html_body = elgg_view("sytick/create_manager_email", $vars);
     $result = elgg_send_email($site->email, $user->email, $subject, $html_body, NULL);
-    //print $body;print '<pre>';print_r($result);exit;
 }
 
 function get_unvalidated_user_count($user_type) {
@@ -1819,11 +1717,6 @@ function get_material_type_id_values() {
         'subtypes' => 'material_type',
         'limit' => ELGG_ENTITIES_NO_VALUE
     );
-    $search_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
     $material_type_entities = elgg_get_entities_from_metadata($search_arr);
     $material_id_values = array("" => "select");
     if (count($material_type_entities)) {
@@ -1893,14 +1786,6 @@ function get_certificate_by_type($type = 0, $user_guid, $page_limit = 0) {
             'value' => $type
         );
     }
-//	if(! elgg_is_admin_logged_in())
-//	{
-    $select_arr['metadata_name_value_pairs'][] = array(
-        'name' => "is_deleted",
-        'value' => 0,
-        'operand' => '='
-    );
-    //}
     $certificates = elgg_get_entities_from_metadata($select_arr);
     foreach ($certificates as $certificate) {
         // An array of all qualification types.
@@ -1912,7 +1797,6 @@ function get_certificate_by_type($type = 0, $user_guid, $page_limit = 0) {
         $certificates_arr[$certificate->guid]['certificate_id'] = $certificate->certificate_id;
         $certificates_arr[$certificate->guid]['certificate_type'] = $certificate->certificate_type;
     }
-    //print '<pre>';print_r($certificates_arr);//exit;
     return $certificates_arr;
 }
 

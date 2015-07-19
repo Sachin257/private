@@ -15,6 +15,17 @@ $inventory_types[2] = "glass";
 
 /**
  *
+ * global variable array for units
+ */
+global $units;
+$units[0] = "feet";
+$units[1] = "inch";
+$units[2] = "meter";
+$units[3] = "centimeter";
+$units[4] = "millimeter";
+
+/**
+ *
  * global variable array for inventory types
  */
 global $order_from_types;
@@ -93,6 +104,8 @@ function stad_init() {
     elgg_register_page_handler('project_manager', 'stad_project_manager_page_handler');
     elgg_register_page_handler('paint_used', 'stad_paint_used_page_handler');
     elgg_register_page_handler('material_alerts', 'stad_material_alerts_page_handler');
+    elgg_register_page_handler('assign_work', 'stad_assign_work_page_handler');
+    elgg_register_page_handler('tentative_work', 'stad_tentative_work_page_handler');
 
     elgg_register_action("user/save", elgg_get_plugins_path() . "sytick/actions/user/save.php");
     elgg_register_action("user/emergency", elgg_get_plugins_path() . "sytick/actions/user/emergency.php");
@@ -116,6 +129,8 @@ function stad_init() {
     elgg_register_action("inventory/save", elgg_get_plugins_path() . "sytick/actions/inventory/save.php");
     elgg_register_action("painting_project/delete", elgg_get_plugins_path() . "sytick/actions/painting_project/delete.php");
     elgg_register_action("painting_project/save", elgg_get_plugins_path() . "sytick/actions/painting_project/save.php");
+    elgg_register_action("assign_work/save", elgg_get_plugins_path() . "sytick/actions/assign_work/save.php");
+    elgg_register_action("tentative_work/save", elgg_get_plugins_path() . "sytick/actions/tentative_work/save.php");
 
     elgg_register_action("employee/save", elgg_get_plugins_path() . "sytick/actions/employee/save.php");
 
@@ -163,6 +178,30 @@ function stad_page_handler($segments) {
 
 function stad_material_alerts_page_handler($segments){
     include elgg_get_plugins_path() . 'sytick/pages/material_alerts/all.php';
+}
+
+function stad_assign_work_page_handler($segments){
+    switch ($segments[0]) {
+        case 'add':
+            include elgg_get_plugins_path() . 'sytick/pages/assign_work/add.php';
+            break;
+        case 'all':
+        default :
+            include elgg_get_plugins_path() . 'sytick/pages/assign_work/all.php';
+            break;
+    }
+}
+
+function stad_tentative_work_page_handler($segments){
+    switch ($segments[0]) {
+        case 'add':
+            include elgg_get_plugins_path() . 'sytick/pages/tentative_work/add.php';
+            break;
+        case 'all':
+        default :
+            include elgg_get_plugins_path() . 'sytick/pages/tentative_work/all.php';
+            break;
+    }
 }
 
 function stad_user_page_handler($segments) {

@@ -203,6 +203,59 @@ switch($process){
                 }
                 $result['roles'] = $entities;
                 break;
+        case "getProjectsFromOrder":
+                $params["order_from"] = get_sanitised_input('order_from');
+                $projects = get_painting_projects_from_metadata($params);
+                $name_arr = array();
+                foreach ($projects as $project){
+                    $name_arr[$project->title] = $project->title;
+                }
+                $result['projects'] = $name_arr;
+                break;
+        case "getProjectsFromName":
+                $params["order_from"] = get_sanitised_input('order_from');
+                $project_name = get_sanitised_input('project_name');
+                $projects = get_painting_projects_from_metadata($params);
+                foreach ($projects as $_paint_entity) {
+                    $painting_project_entities_ids[] = $_paint_entity->guid;
+                }
+                $painting_project_entities_ids = get_paint_search($project_name, join($painting_project_entities_ids, ","));
+                $options = array(
+                    'type' => 'object',
+                    'subtypes' => 'painting_project',
+                    'guid' => $painting_project_entities_ids,
+                    'limit' => ELGG_ENTITIES_NO_VALUE
+                );
+                $painting_project_entities = elgg_get_entities_from_metadata($options);
+                $materials = array();
+                foreach ($projects as $project){
+                    $material = get_entity($project->material_id);
+                    $materials[$material->guid] = $material->title;
+                }
+                $result['materials'] = $materials;
+                break;
+        case "getProjectDates":
+                $params["order_from"] = get_sanitised_input('order_from');
+                $params["material_id"] = get_sanitised_input('material_id');
+                $project_name = get_sanitised_input('project_name');
+                $projects = get_painting_projects_from_metadata($params);
+                foreach ($projects as $_paint_entity) {
+                    $painting_project_entities_ids[] = $_paint_entity->guid;
+                }
+                $painting_project_entities_ids = get_paint_search($project_name, join($painting_project_entities_ids, ","));
+                $options = array(
+                    'type' => 'object',
+                    'subtypes' => 'painting_project',
+                    'guid' => $painting_project_entities_ids,
+                    'limit' => ELGG_ENTITIES_NO_VALUE
+                );
+                $painting_project_entities = elgg_get_entities_from_metadata($options);
+                $materials = array();
+                foreach ($projects as $project){
+                    $dates[$project->guid] = date("d-m-Y", $project->time_created);
+                }
+                $result['dates'] = $dates;
+                break;
         case "get_paint_details":
                 $paint_guid = get_sanitised_input('paint_guid');
                 $paint = get_entity($paint_guid);

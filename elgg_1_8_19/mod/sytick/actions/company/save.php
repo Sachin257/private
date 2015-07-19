@@ -245,7 +245,6 @@ if (!empty($_FILES[$file_upload_field]['name']))
 }
 
 if($company->guid) {
-	create_company_manager_as_primary_contact($company, $manager_arr);
 	system_message(elgg_echo("company:message:saved"));
 	forward("company/all/".$company->company_type);
 } else {

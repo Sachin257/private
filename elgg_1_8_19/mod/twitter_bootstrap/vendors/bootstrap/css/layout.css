@@ -517,7 +517,7 @@ table.mgr_list tr td a i{margin-right: 5px;}
 .top_userpannel_mob ul li a.acount{background:url(../img/tp_account_ic.png) no-repeat 10px center;}
 
 /* ---------------------- FORMS ------------------------*/
-.mger_add .span5 input, .mger_add .span5 textarea{width: 94.5%;}
+.mger_add .span5 input, .mger_add .span5 textarea{width: 96.5%;}
 .mger_add .span5 textarea{height: 50px; height: 92px; margin-bottom:0;}
 .mger_add .span5 label{font-weight: bold;}
 
@@ -597,7 +597,7 @@ table.induction_dtlist tr td{ border-right: 1px solid #bbb;  border-bottom: 1px 
     .tb_checkin_dashboard .top_userpannel ul li:nth-child(4),
     .tb_checkin_list .top_userpannel ul li:nth-child(3){display: none;}
     .tb_security_checkin #side_coloumn_logo{padding: 0;}
-    .tb_security_checkin .select-wrapper, .select-wrapper select{
+    .tb_security_checkin .select-wrapper, .select-wrapper select, .select-unit-wrapper select{
         width: 698px;
         background-color: #fff;
         height: 55px;

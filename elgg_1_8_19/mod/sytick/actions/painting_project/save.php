@@ -7,6 +7,23 @@ $material_id = get_input('material_id');
 $order_from_id = get_input('order_from');
 $nopieces = get_input('nopieces');
 $lengthperpiece = get_input('lengthperpiece');
+$unit = get_input("unit");
+switch ($unit){
+    case 1:
+        $lengthperpiece /= 12;
+        break;
+    case 2:
+        $lengthperpiece = $lengthperpiece * 3.280;
+        break;
+    case 3:
+        $lengthperpiece = $lengthperpiece * 3.280 / 100;
+        break;
+    case 4:
+        $lengthperpiece = $lengthperpiece * 3.280 / 1000;
+        break;
+    default:
+        break;
+}
 $flag = "";
 if($paint_guid !== "")
 {

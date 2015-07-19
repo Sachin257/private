@@ -11,7 +11,7 @@ $total_pieces = elgg_extract('nopiece', $vars);
         <div><?php echo elgg_view_form("painting_project/filter", array('id' => 'frm_painting_project_search'), $vars); ?></div>
     </div>
     <div class="clear" style="margin: 5px; height: 25px;">
-    <span>Total Cost: <?php echo $total_cost ?> &nbsp;&nbsp;&nbsp; Total number of pieces: <?php echo $total_pieces ?></span>
+        <span>Total Cost: <?php echo $total_cost ?> &nbsp;&nbsp;&nbsp; Total number of pieces: <?php echo $total_pieces ?></span>
     </div>
     <div>
         <?php if ($painting_project_entities && count($painting_project_entities)) { ?>
@@ -77,12 +77,12 @@ $total_pieces = elgg_extract('nopiece', $vars);
                                 ?>
                             </td>
                         </tr>
-            <?php } ?>
+                    <?php } ?>
                 </tbody>
             </table>
         <?php } else { ?>
-    <?php echo elgg_echo('paint:none') ?>	
-<?php } ?>
+            <?php echo elgg_echo('paint:none') ?>	
+        <?php } ?>
     </div>
     <div class="clear">
     </div>
@@ -98,7 +98,17 @@ $total_pieces = elgg_extract('nopiece', $vars);
 
                             <label><?php echo elgg_echo("project:name"); ?></label>
                             <?php echo elgg_view('input/text', array('name' => 'projName', "id" => "projName")); ?>
-                            <span class="error_msg clear projName_err"></span>      
+                            <span class="error_msg clear projName_err"></span>
+                            <label><?php echo elgg_echo("order:from"); ?></label>
+                            <?php
+                            echo elgg_view("input/dropdown", array(
+                                "name" => "order_from",
+                                "id" => "order_from",
+                                "class" => "custom-select",
+                                "options_values" => $order_from
+                            ));
+                            ?>
+                            <span class="error_msg clear orderFrom_err"></span>
                         </div>
                         <div class="userrow">
 
@@ -108,8 +118,8 @@ $total_pieces = elgg_extract('nopiece', $vars);
                 </div>
                 <div align="center" class="MT_two">
 
-                <?php echo elgg_view('input/button', array('id' => 'btn_project_name', "class" => "btn btn-default btn_submit_grey", 'value' => elgg_echo('certificate:add'))); ?>
-                <?php echo elgg_view('input/button', array('id' => 'btn_quest_cancel', "data-dismiss" => "modal", "class" => "btn btn-default btn_submit_grey", 'value' => elgg_echo('certificate:cancel'))); ?><span class="ajx-submit-load disp-none"></span>
+                    <?php echo elgg_view('input/button', array('id' => 'btn_project_name', "class" => "btn btn-default btn_submit_grey", 'value' => elgg_echo('certificate:add'))); ?>
+                    <?php echo elgg_view('input/button', array('id' => 'btn_quest_cancel', "data-dismiss" => "modal", "class" => "btn btn-default btn_submit_grey", 'value' => elgg_echo('certificate:cancel'))); ?><span class="ajx-submit-load disp-none"></span>
                 </div>
             </div>
         </div>
