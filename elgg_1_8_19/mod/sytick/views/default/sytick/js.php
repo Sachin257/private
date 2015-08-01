@@ -1441,6 +1441,7 @@ elgg.sytick.init = function() {
             
             
        $(".custom-select-default").each(function(){
+//console.log('fasdf');
             $(this).wrap("<span class='select-wrapper'></span>");
             $(this).after("<span class='holder'></span>");
         });
@@ -1454,6 +1455,7 @@ elgg.sytick.init = function() {
                 
     $( document ).ready(function() {
         $(".custom-select").each(function(){
+console.log('fasdf');
             var selectedOption = $(this).find(":selected").text();
             $(this).wrap("<span class='select-wrapper'></span>");
             $(this).after("<span class='holder'></span>");
@@ -1469,6 +1471,7 @@ elgg.sytick.init = function() {
     });        
            
     $(".custom-select").change(function(){
+//console.log('fasdf');
             var selectedOption = $(this).find(":selected").text();
             console.log("change",selectedOption);
             $(this).next(".holder").html(selectedOption);
@@ -2383,7 +2386,7 @@ elgg.sytick.init = function() {
             {
                 $("#a_start_date").next(".holder").html("");
                 $("#a_start_date").empty();
-                var postData = "order_from="+jQuery("#a_order_from").val() + "&project_name="+ jQuery("#a_paint_project_name").val() + "&material_id" + jQuery(this).val();
+                var postData = "order_from="+jQuery("#a_order_from").val() + "&project_name="+ jQuery("#a_paint_project_name").val() + "&material_id=" + jQuery(this).val();
                 var __elgg_ts =	elgg.security.token.__elgg_ts;
 		var __elgg_token =	elgg.security.token.__elgg_token;
                 jQuery.ajax( {

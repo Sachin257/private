@@ -60,7 +60,7 @@ if ($paint_guid) {
     if ($flag == "" ){
     forward('painting_project/all');
     }  else {
-        forward("painting_project/add?name=$title");
+        forward("painting_project/add?name=$title"."&from=$order_from_id");
     }
 } else {
     register_error(elgg_echo("paint:error:cannot_save"));

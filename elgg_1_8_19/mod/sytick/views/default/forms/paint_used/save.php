@@ -1,3 +1,4 @@
+
 <div class="cmp_enity nest_wrap rounded_corners frm_box_shadow frm_box_border span12 MT_one MB_three mger_add">
 
     <div class="span5">
@@ -12,7 +13,7 @@
         ?>
         <span class="error_msg clear paint_id_name_err"></span>
     </div>
-
+   
     <div class="span5" style="width: 200px;">
         <label><?php echo elgg_echo("paint:amount1"); ?></label>
         <?php echo elgg_view('input/text', array('name' => 'paint_amount', "id" => "paint_amount")); ?>

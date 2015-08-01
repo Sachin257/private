@@ -228,7 +228,7 @@ switch($process){
                 );
                 $painting_project_entities = elgg_get_entities_from_metadata($options);
                 $materials = array();
-                foreach ($projects as $project){
+                foreach ($painting_project_entities as $project){
                     $material = get_entity($project->material_id);
                     $materials[$material->guid] = $material->title;
                 }
@@ -251,7 +251,7 @@ switch($process){
                 );
                 $painting_project_entities = elgg_get_entities_from_metadata($options);
                 $materials = array();
-                foreach ($projects as $project){
+                foreach ($painting_project_entities  as $project){
                     $dates[$project->guid] = date("d-m-Y", $project->time_created);
                 }
                 $result['dates'] = $dates;

@@ -1,12 +1,24 @@
 <?php
 
 // get the form inputs
+$tentative_work_guid = get_input('guid');
 $tentative_date = get_input('date');
 $shift = get_input('shift');
 $color = get_input('color');
 $description = get_input('description');
-
-$tentative_work = new ElggObject();
+if ($tentative_work_guid){
+    $entity = get_entity($tentative_work_guid);
+    if (elgg_instanceof($entity, 'object', 'tentative_work') && $entity->canEdit()) {
+        $tentative_work = $entity;
+        $flag = TRUE;
+    } else {
+        register_error(elgg_echo('paint:error:cannot_edit'));
+        forward(get_input('forward', REFERER));
+    }
+} else {
+    // create a new qualification_type object
+    $tentative_work = new ElggObject();
+}
 
 $tentative_work->subtype = "tentative_work";
 $tentative_work->title = $color . "-" . $tentative_date;

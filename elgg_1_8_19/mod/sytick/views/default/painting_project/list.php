@@ -4,6 +4,10 @@ $offset = elgg_extract('offset', $vars);
 $order_from = elgg_extract('order_from', $vars);
 $total_cost = elgg_extract('cost', $vars);
 $total_pieces = elgg_extract('nopiece', $vars);
+$gtotal_cost = elgg_extract('gcost', $vars);
+$gtotal_pieces = elgg_extract('gnopiece', $vars);
+
+
 ?>
 <div class="clear"></div>
 <div class="cmp_list rounded_corners frm_box_shadow frm_box_border MB_five mgr_listall">
@@ -11,9 +15,9 @@ $total_pieces = elgg_extract('nopiece', $vars);
         <div><?php echo elgg_view_form("painting_project/filter", array('id' => 'frm_painting_project_search'), $vars); ?></div>
     </div>
     <div class="clear" style="margin: 5px; height: 25px;">
-        <span>Total Cost: <?php echo $total_cost ?> &nbsp;&nbsp;&nbsp; Total number of pieces: <?php echo $total_pieces ?></span>
+         <span>Total Cost:&nbsp;&nbsp;<?php echo $gtotal_cost ?> &nbsp;&nbsp;&nbsp;Total number of pieces:&nbsp;&nbsp;<?php echo $gtotal_pieces ?> </span>
     </div>
-    <div>
+    <div style="height: 350px; overflow: auto">
         <?php if ($painting_project_entities && count($painting_project_entities)) { ?>
             <table class="elgg-list elgg-list-entity mgr_list">	
                 <tbody>
@@ -67,13 +71,15 @@ $total_pieces = elgg_extract('nopiece', $vars);
                                     'title' => 'Add new',
                                     'rel' => 'nofollow'
                                 ));
-                                $delete_url = "/action/paint/delete/?guid={$paint_entitie->guid}&offset=$offset";
-                                echo elgg_view('output/confirmlink', array(
-                                    'href' => $delete_url,
-                                    'text' => elgg_echo('entity:delete'),
-                                    'title' => 'Delete',
-                                    'class' => 'elgg-button-delete float-alt'
-                                ));
+				if(elgg_is_admin_logged_in()){
+                                    $delete_url = "/action/paint/delete/?guid={$paint_entitie->guid}&offset=$offset";
+                                    echo elgg_view('output/confirmlink', array(
+                                        'href' => $delete_url,
+                                        'text' => elgg_echo('entity:delete'),
+                                        'title' => 'Delete',
+                                        'class' => 'elgg-button-delete float-alt'
+                                    ));
+				}
                                 ?>
                             </td>
                         </tr>

@@ -8,7 +8,7 @@
             
             <li><a href="/painting_project/all"><span class="ic_induction circle"></span>Painting<br />Projects</a></li>
             <li><a href="/assign_work/all"><span class="ic_evemanager circle"></span>Assign<br />Work</a></li>
-            <li><a href="#"><span class="ic_mgmaccount circle"></span>Work<br />Efficency</a></li>
+            <li><a href="/tentative_work/all"><span class="ic_settings circle"></span>Tentative<br />Work</a></li>
             <li><a href="/painting_project/employee_all"><span class="ic_useraccount circle"></span>Employee</a></li>
         </ul>
     </div>

@@ -16,7 +16,8 @@ $offset = elgg_extract('offset', $vars);
                     <th style="width: 20%"><?php echo elgg_echo('entity:date')?></th>
                     <th style="width: 20%"><?php echo elgg_echo('paint:used:shift')?></th>
                     <th style="width: 20%"><?php echo elgg_echo('paint:colour')?></th>
-                    <th style="width: 40%"><?php echo elgg_echo('entity:description')?></th>
+                    <th style="width: 35%"><?php echo elgg_echo('entity:description')?></th>
+                    <th style="width: 5%"></th>
                 </tr>
                 <?php foreach($tentative_work_entities as $tentative_work_entitie)  {?>
                     <tr id="elgg-object-<?php echo $tentative_work_entitie->guid?>" class="elgg-item" style="height: 40px;">
@@ -24,6 +25,17 @@ $offset = elgg_extract('offset', $vars);
                         <td><?php echo $tentative_work_entitie->shift;?></td>
                         <td><?php echo $tentative_work_entitie->color;?></td>
                         <td><?php echo $tentative_work_entitie->description;?></td>
+                        <td class="company-link">
+                            <?php
+                            $edit_url = "/tentative_work/edit/$tentative_work_entitie->guid";
+                            echo elgg_view('output/url', array(
+                                'href' => $edit_url,
+                                'text' => elgg_echo('entity:edit'),
+                                'class' => 'MR_20 elgg-button-edit-information float-alt',
+                                'rel' => 'nofollow'
+                            ));
+                            ?>
+                        </td>
                     </tr>
                 <?php } ?>
                 </tbody>
