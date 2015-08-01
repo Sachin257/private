@@ -40,7 +40,7 @@
     <h2>Manage your Accounts</h2>
     <div class="adm_secicons">
         <ul class="nest_wrap">
-            <li><a href="#"><span class="ic_settings circle"></span>Daily Settings</li>
+            <li><a href="/tentative_work/all"><span class="ic_settings circle"></span>Tentative<br />Work</a></li>
             <!--<li><a href="/admin"><span class="ic_admaccoutns circle"></span>Administration<br />Accounts</a></li>-->
             <li><a href="#"><span class="ic_induction circle"></span>Alert<br />Settings</a></li>
             <li><a href="#"><span class="ic_evemanager circle"></span>Calculations</a></li>

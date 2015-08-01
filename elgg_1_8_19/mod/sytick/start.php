@@ -133,6 +133,7 @@ function stad_init() {
     elgg_register_action("tentative_work/save", elgg_get_plugins_path() . "sytick/actions/tentative_work/save.php");
 
     elgg_register_action("employee/save", elgg_get_plugins_path() . "sytick/actions/employee/save.php");
+    elgg_register_action("employee/delete", elgg_get_plugins_path() . "sytick/actions/employee/delete.php");
 
     elgg_extend_view('js/elgg', 'sytick/js');
     $avatar_cropper = 'mod/twitter_bootstrap/vendors/bootstrap/js/ui.avatar_cropper.js';
@@ -196,6 +197,9 @@ function stad_tentative_work_page_handler($segments){
     switch ($segments[0]) {
         case 'add':
             include elgg_get_plugins_path() . 'sytick/pages/tentative_work/add.php';
+            break;
+        case 'edit':
+            include elgg_get_plugins_path(). 'sytick/pages/tentative_work/edit.php';
             break;
         case 'all':
         default :

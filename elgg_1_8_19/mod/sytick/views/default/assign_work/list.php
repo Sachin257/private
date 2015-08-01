@@ -14,7 +14,8 @@ $order_from = elgg_extract('order_from', $vars);
             <table class="elgg-list elgg-list-entity mgr_list">
                 <tbody>
                 <tr>
-                    <th><?php echo "Project - Date"?></th>
+                    <th><?php echo "Project"?> </th>
+                    <th style="width:100px;">Date</th>
                     <th><?php echo elgg_echo('order:from') ?></th>
                     <th><?php echo elgg_echo('material:name')?></th>
                     <th><?php echo elgg_echo("paint:used:shift"); ?></th>
@@ -29,14 +30,17 @@ $order_from = elgg_extract('order_from', $vars);
                     ?>
                     <tr style="height: 39px;" id="elgg-object-<?php echo $assign_work->guid?>" class="elgg-item">
                         <td><?php
-                            echo elgg_view('output/url', array(
+                           $pro= elgg_view('output/url', array(
                                 'href' => "/painting_project/employee_view/$project->guid",
                                 'text' => $assign_work->title,
                                 'class' => '',
                                 'rel' => 'nofollow'
                             ));
+                           $exp_pro=explode("-",$pro);
+                            echo $exp_pro[0];
                             ?>
                         </td>
+                        <td><?php echo $assign_work->date;?></td>
                         <td><?php echo $order_from[$project->order_from]; ?></td>
                         <td><?php echo $material->title; ?></td>
                         <td><?php echo $assign_work->shift;?></td>

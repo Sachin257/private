@@ -69,7 +69,8 @@ function check_and_create_paint_alerts($paint_guid){
 function get_number_of_painting_projects(){
      $options = array(
         'type' => 'object',
-        'subtype' => 'painting_project'
+        'subtype' => 'painting_project',
+         'limit' => ELGG_ENTITIES_NO_VALUE
     );
      $projects = elgg_get_entities_from_metadata($options);
      $name_arr = array();

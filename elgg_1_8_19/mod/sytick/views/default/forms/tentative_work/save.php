@@ -2,7 +2,7 @@
 
     <div class="span5">
         <label><?php echo elgg_echo("entity:date"); ?></label>
-        <?php echo elgg_view('input/date', array('id' => 'date', 'name' => 'date')); ?><a href="javascript:void(0)" id="date_of_issue_lnk" class="calimage"></a>
+        <?php echo elgg_view('input/date', array('id' => 'date','value' => $vars["entity"]->date, 'name' => 'date')); ?><a href="javascript:void(0)" id="date_of_issue_lnk" class="calimage"></a>
         <span class="error_msg clear paint_date_err"></span>
     </div>
 
@@ -14,7 +14,8 @@
             "name" => "shift",
             "id" => "shift",
             "class" => "custom-select",
-            "options_values" => $options
+            "options_values" => $options,
+            'value' => $vars["entity"]->shift
         ));
         ?>
         <span class="error_msg clear shift_err"></span>
@@ -22,15 +23,20 @@
 
     <div class="span5">
         <label><?php echo elgg_echo("paint:colour"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'colour', "id"=>"paint_color" , 'value' => $vars["entity"]->colour)); ?>
+        <?php echo elgg_view('input/text', array('name' => 'color', "id"=>"paint_color" , 'value' => $vars["entity"]->colour)); ?>
         <span class="error_msg clear paint_color_err"></span>
     </div>
 
     <div class="span5">
         <label><?php echo elgg_echo("entity:description"); ?></label>
-        <?php echo elgg_view('input/text', array('name' => 'description', "id" => "description")); ?>
+        <?php echo elgg_view('input/text', array('name' => 'description', 'value' => $vars["entity"]->description, "id" => "description")); ?>
         <span class="error_msg clear description_err"></span>
     </div>
+
+    <?php
+    if ($vars["entity"]->guid)
+        echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars["entity"]->guid));
+    ?>
 
     <div class="clear"></div>
     <div align="center" class="MT_two MB_three">
