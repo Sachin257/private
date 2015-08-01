@@ -14,7 +14,7 @@ $order_from = elgg_extract('order_from', $vars);
             <table class="elgg-list elgg-list-entity mgr_list">
                 <tbody>
                 <tr>
-                    <th><?php echo "Project"?></th>
+                    <th><?php echo "Project"?> </th>
                     <th style="width:100px;">Date</th>
                     <th><?php echo elgg_echo('order:from') ?></th>
                     <th><?php echo elgg_echo('material:name')?></th>
